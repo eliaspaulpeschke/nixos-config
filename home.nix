@@ -1,6 +1,8 @@
 { config, pkgs, ... }: 
 
 {
+
+  imports = [ inputs.nixvim.homeManagerModules.nixvim ];
   home.username = "elias";
   home.homeDirectory = "/home/elias";
 
@@ -24,6 +26,8 @@
     lsof
     pciutils
     usbutils
+
+    lynx
   ];
 
   programs.git = {
@@ -41,7 +45,14 @@
     enableCompletion = true;
   };
 
-
+  programs.nixvim = {
+    enable = true; 
+    luaLoader.enable = true;
+    colorschemes.catpuccin.enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
 
   home.stateVersion = "24.11";
 

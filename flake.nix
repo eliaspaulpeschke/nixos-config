@@ -13,12 +13,19 @@
      url = "github:sodiboo/niri-flake";
     };
 
+    nixvim = {
+     url = "github:nix-community/nixvim/nixos-24.11";
+     inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, niri, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, niri, nixvim, ... }@inputs: {
 
     nixosConfigurations.twinkpad = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux"; 
+
+      specialArgs = { inherit inputs; };
 
       modules = [
         ./configuration.nix
