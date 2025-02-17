@@ -1,8 +1,7 @@
-{ config, pkgs, ... }: 
+{ config, pkgs, inputs, ... }: 
 
 {
 
-  imports = [ inputs.nixvim.homeManagerModules.nixvim ];
   home.username = "elias";
   home.homeDirectory = "/home/elias";
 
@@ -28,6 +27,7 @@
     usbutils
 
     lynx
+    tmux
   ];
 
   programs.git = {
@@ -45,13 +45,17 @@
     enableCompletion = true;
   };
 
+  programs.firefox = {
+    enable = true;
+  };
+
   programs.nixvim = {
     enable = true; 
     luaLoader.enable = true;
-    colorschemes.catpuccin.enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+#    colorschemes.catppuccin.enable = true;
   };
 
   home.stateVersion = "24.11";
