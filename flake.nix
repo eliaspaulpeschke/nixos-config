@@ -30,9 +30,7 @@
       modules = [
         ./configuration.nix
 
-        niri.nixosModules.niri {
-          programs.niri.enable = true;
-        }
+	inputs.niri.nixosModules.niri (import ./niri)
 
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;

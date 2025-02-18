@@ -5,6 +5,10 @@
   home.username = "elias";
   home.homeDirectory = "/home/elias";
 
+  imports = [
+     ./nixvim
+     ];
+
   home.packages = with pkgs; [
     zip
     xz
@@ -49,15 +53,7 @@
     enable = true;
   };
 
-  programs.nixvim = {
-    enable = true; 
-    luaLoader.enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-#    colorschemes.catppuccin.enable = true;
-  };
-
+  
   home.stateVersion = "24.11";
 
   programs.home-manager.enable = true;
