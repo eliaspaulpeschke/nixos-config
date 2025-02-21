@@ -34,7 +34,7 @@
 
 	stylix.nixosModules.stylix
 
-#	./stylix
+	./stylix
 
 	niri.nixosModules.niri
 
