@@ -44,6 +44,8 @@
     enable = true;
   };
 
+  programs.fuzzel.enable = true;
+
   programs.bash = {
     enable = true;
     enableCompletion = true;
@@ -51,6 +53,12 @@
 
   programs.firefox = {
     enable = true;
+  };	
+
+  programs.waybar = {
+    enable = true;
+    settings.mainBar.layer = "top";
+    systemd.enable = true;
   };
 
   

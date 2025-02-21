@@ -7,7 +7,9 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
+    }; 
+
+    stylix.url = "github:danth/stylix";
 
     niri = {
      url = "github:sodiboo/niri-flake";
@@ -20,7 +22,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, niri, nixvim, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, niri, nixvim, stylix, ... }@inputs: {
 
     nixosConfigurations.twinkpad = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";  
@@ -30,7 +32,13 @@
       modules = [
         ./configuration.nix
 
-	inputs.niri.nixosModules.niri (import ./niri)
+	stylix.nixosModules.stylix
+
+#	./stylix
+
+	niri.nixosModules.niri
+
+	./niri
 
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
