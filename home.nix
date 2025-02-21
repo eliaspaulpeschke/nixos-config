@@ -32,6 +32,8 @@
 
     lynx
     tmux
+
+    swaybg
   ];
 
   programs.git = {
@@ -64,7 +66,7 @@
   
   home.stateVersion = "24.11";
 
-  programs.home-manager.enable = true;
+  programs.home-manager.enable = true; 
 
 }
 

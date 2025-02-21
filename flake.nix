@@ -32,18 +32,15 @@
       modules = [
         ./configuration.nix
 
-	stylix.nixosModules.stylix
-
-	./stylix
-
 	niri.nixosModules.niri
 
 	./niri
 
         home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
+          home-manager.useGlobalPkgs = false;
           home-manager.useUserPackages = true; 
           home-manager.sharedModules = [ nixvim.homeManagerModules.nixvim ]; 
+	  home-manager.backupFileExtension = "bak";
       
           home-manager.users.elias = import ./home.nix;
 
