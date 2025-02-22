@@ -7,6 +7,8 @@
 
   imports = [
      ./nixvim
+     ./style
+     ./waybar.nix
      ];
 
   home.packages = with pkgs; [
@@ -57,13 +59,6 @@
     enable = true;
   };	
 
-  programs.waybar = {
-    enable = true;
-    settings.mainBar.layer = "top";
-    systemd.enable = true;
-  };
-
-  
   home.stateVersion = "24.11";
 
   programs.home-manager.enable = true; 
