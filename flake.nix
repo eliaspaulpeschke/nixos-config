@@ -23,12 +23,16 @@
 
   outputs = { self, nixpkgs, home-manager, niri, nixvim, ... }@inputs: {
 
+
+
     nixosConfigurations.twinkpad = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";  
 
       specialArgs = { inherit inputs; }; 
 
       modules = [
+        ./overlays.nix
+
         ./configuration.nix
 
 	niri.nixosModules.niri

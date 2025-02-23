@@ -6,11 +6,9 @@
   home.homeDirectory = "/home/elias";
 
   imports = [
-      inputs.niri.homeModules.niri
      ./nixvim
      ./style
      ./waybar.nix
-     ./niri/style.nix
      ];
 
   home.packages = with pkgs; [

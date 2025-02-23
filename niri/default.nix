@@ -5,11 +5,9 @@ let
 in
 {
 #     imports = [ ./style.nix ./binds.nix ];
-     nixpkgs.overlays = [ inputs.niri.overlays.niri ];
      programs.niri = {
        enable = true;
      #  package = pkgs.niri-unstable;
-#       environment."NIXOS_OZONE_WL" = 1;
      };
      services.greetd = {
         enable = true;
