@@ -1,4 +1,4 @@
 {...}:
 {
-   programs.niri.settings.binds = {};
+ #  programs.niri.settings.binds = {};
 }
