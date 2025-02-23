@@ -10,7 +10,8 @@
           ExecStart = "${pkgs.swaybg}/bin/swaybg -i ${./wallpaper.jpg}";
        };
        Install = {
-          wantedBy = [ "graphical-session.target" ];
+
+          WantedBy = [ "graphical-session.target" ];
        };
    };
 }

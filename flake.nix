@@ -9,7 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     }; 
 
-    stylix.url = "github:danth/stylix";
 
     niri = {
      url = "github:sodiboo/niri-flake";
@@ -22,7 +21,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, niri, nixvim, stylix, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, niri, nixvim, ... }@inputs: {
 
     nixosConfigurations.twinkpad = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";  

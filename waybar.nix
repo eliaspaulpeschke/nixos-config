@@ -13,8 +13,8 @@
          "network"
 	 "cpu"
 	 "memory"
-	 "clock"
 	 "battery"
+	 "clock"
 	 "tray"
 	 ];
        battery = {
