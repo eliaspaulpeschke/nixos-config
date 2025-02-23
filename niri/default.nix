@@ -4,7 +4,7 @@ let
   niri-session = "${pkgs.niri-stable}/bin/niri-session";
 in
 {
-     imports = [ ./style.nix ./binds.nix ];
+#     imports = [ ./style.nix ./binds.nix ];
      nixpkgs.overlays = [ inputs.niri.overlays.niri ];
      programs.niri = {
        enable = true;

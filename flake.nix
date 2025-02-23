@@ -39,8 +39,8 @@
           home-manager.useGlobalPkgs = false;
           home-manager.useUserPackages = true; 
           home-manager.sharedModules = [ nixvim.homeManagerModules.nixvim ]; 
+	  home-manager.extraSpecialArgs = { inherit inputs; };
 	  home-manager.backupFileExtension = "bak";
-      
           home-manager.users.elias = import ./home.nix;
 
         }
