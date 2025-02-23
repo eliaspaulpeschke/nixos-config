@@ -9,6 +9,7 @@
      ./nixvim
      ./style
      ./waybar.nix
+#     ./niri/style.nix
      ];
 
   home.packages = with pkgs; [
@@ -42,6 +43,10 @@
     enable = true;
     userName = "Elias Peschke";
     userEmail = "eliaspeschke@googlemail.com";
+  };
+
+  programs.ssh = {
+    enable = true;
   };
 
   programs.alacritty = {
