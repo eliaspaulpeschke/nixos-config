@@ -9,7 +9,7 @@
      ./nixvim
      ./style
      ./waybar.nix
-#     ./niri/style.nix
+     ./niri
      ];
 
   home.packages = with pkgs; [

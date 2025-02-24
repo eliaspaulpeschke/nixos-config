@@ -9,7 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     }; 
 
-
     niri = {
      url = "github:sodiboo/niri-flake";
     };
@@ -33,19 +32,18 @@
       modules = [
         ./overlays.nix
 
-        ./configuration.nix
+	./nixos
+
 
 	niri.nixosModules.niri
 
-	./niri
-
         home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = false;
+          home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true; 
           home-manager.sharedModules = [ nixvim.homeManagerModules.nixvim ]; 
 	  home-manager.extraSpecialArgs = { inherit inputs; };
 	  home-manager.backupFileExtension = "bak";
-          home-manager.users.elias = import ./home.nix;
+          home-manager.users.elias = import ./home;
 
         }
       ];

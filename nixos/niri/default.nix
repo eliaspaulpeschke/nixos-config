@@ -7,7 +7,7 @@ in
 #     imports = [ ./style.nix ./binds.nix ];
      programs.niri = {
        enable = true;
-     #  package = pkgs.niri-unstable;
+       package = pkgs.niri-stable;
      };
      services.greetd = {
         enable = true;
