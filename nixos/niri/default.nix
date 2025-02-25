@@ -1,13 +1,13 @@
 {pkgs,inputs, ...}:
 let
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
-  niri-session = "${pkgs.niri-stable}/bin/niri-session";
+  niri-session = "${pkgs.niri-unstable}/bin/niri-session";
 in
 {
 #     imports = [ ./style.nix ./binds.nix ];
      programs.niri = {
        enable = true;
-       package = pkgs.niri-stable;
+       package = pkgs.niri-unstable;
      };
      services.greetd = {
         enable = true;

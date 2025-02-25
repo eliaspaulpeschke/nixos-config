@@ -2,8 +2,10 @@
 {
   programs.niri.settings = {
     layout = {
-      focus-ring.width = 2;
-#      focus-ring.color = "rgba(255,255,255,0.3)";
+      gaps = 32;
+      focus-ring.width = 6;
+      focus-ring.active.color = "rgba(255,255,255,0.3)";
+      focus-ring.inactive.color = "rgba(100,100,100,0.3)";
     };
 
   };

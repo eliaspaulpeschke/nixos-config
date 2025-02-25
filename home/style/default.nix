@@ -8,6 +8,8 @@
           Type = "simple";
           PassEnvironment = "DISPLAY";
           ExecStart = "${pkgs.swaybg}/bin/swaybg -i ${./wallpaper.jpg}";
+	  Restart = "on-failure";
+	  RestartSec = "10s";
        };
        Install = {
 
