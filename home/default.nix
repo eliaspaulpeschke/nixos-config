@@ -9,6 +9,7 @@
      ./nixvim
      ./style
      ./waybar.nix
+     ./alacritty.nix
      ./niri
      ];
 
@@ -46,10 +47,6 @@
   };
 
   programs.ssh = {
-    enable = true;
-  };
-
-  programs.alacritty = {
     enable = true;
   };
 
