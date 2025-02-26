@@ -68,6 +68,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     git
+    pkgs.xdg-user-dirs
   ];
 
 environment.variables.EDITOR = "vim";
@@ -84,6 +85,12 @@ environment.variables.EDITOR = "vim";
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
+
+
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

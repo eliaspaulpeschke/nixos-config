@@ -1,4 +1,7 @@
 { config, pkgs, inputs, ... }:
+let
+  helpers = config.lib.nixvim;
+in
 {
   programs.nixvim = {
     enable = true; 
@@ -31,7 +34,8 @@
 	  "C-p" = "cmp.mapping.select_prev_item()";
 	  "C-b" = "cmp.mapping.scroll_docs(-4)";
 	  "C-f" = "cmp.mapping.scroll_docs(4)";
-	  "C-y" = "cmp.mapping.confirm { select = true }";
+	  "<CR>" = "cmp.mapping.confirm { select = true }";
+	  "C-y" = "cmp.mapping.complete";
 	};
       };
     };
@@ -46,5 +50,34 @@
         nil_ls.enable = true;
       };
     };
+
+    extraPlugins = [(pkgs.vimUtils.buildVimPlugin {
+      name = "moonfly";
+      src = pkgs.fetchFromGitHub {
+        owner = "bluz71";
+        repo = "vim-moonfly-colors";
+        rev = "9b3d08ccd2152a9a6694ce64bd57b1e19662f3c9";
+        hash = "sha256-1BurRJ0TnLSihXZXtr6BMGuvlYnnc3fER4oKQa+2E5w=";
+      };
+    })];
+
+    extraConfigLua = ''
+    vim.cmd [[colorscheme moonfly]]
+    vim.cmd [[highlight Normal guibg=none ctermbg=none]]
+    vim.cmd [[highlight LineNr guibg=none ctermbg=none]]
+    vim.cmd [[highlight Folded guibg=none ctermbg=none]]
+    vim.cmd [[highlight NonText guibg=none ctermbg=none]]
+    vim.cmd [[highlight SpecialKey guibg=none ctermbg=none]]
+    vim.cmd [[highlight VertSplit guibg=none ctermbg=none]]
+    vim.cmd [[highlight SignColumn guibg=none ctermbg=none]]
+    vim.cmd [[highlight EndOfBuffer guibg=none ctermbg=none]]
+    vim.cmd [[highlight TablineFill guibg=none ctermbg=none]]
+  
+
+'';
+
+
+
+
   };
 }
