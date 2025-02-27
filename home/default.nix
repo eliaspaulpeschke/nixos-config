@@ -5,11 +5,16 @@
   home.username = "elias";
   home.homeDirectory = "/home/elias";
 
+  home.shellAliases = {
+    fz = "fzf --tmux";
+  };
+
   imports = [
      ./nixvim
      ./style
      ./waybar.nix
      ./alacritty.nix
+     ./rofi
      ./niri
      ];
 
@@ -55,6 +60,7 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
+    bashrcExtra = "set -o vi";
   };
 
   programs.firefox = {

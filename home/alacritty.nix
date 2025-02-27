@@ -3,6 +3,10 @@
   programs.alacritty = {
     enable = true;
     settings = {
+
+      font = {
+        normal = { family = "GeistMono Nerd Font"; style = "Regular"; };
+      };
       
       window = {
         padding = { x = 15; y = 15; }; 

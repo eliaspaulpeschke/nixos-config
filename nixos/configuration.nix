@@ -89,6 +89,11 @@ environment.variables.EDITOR = "vim";
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.geist-mono
+    nerd-fonts.fira-mono
+  ];
+
 
 
 

@@ -4,12 +4,12 @@
 * {
     font:   "GeistMono Nerd Font Medium 12";
 
-    bg0:     #2B3339;
-    bg1:     #323D43;
-    fg0:     #D3C6AA;
+    bg0:     #080808;
+    bg1:     #323437;
+    fg0:     #80a0ff;
 
-    accent-color:     #A7C080;
-    urgent-color:     #DBBC7F;
+    accent-color:     #ff5454;
+    urgent-color:     #ae81ff;
 
     background-color:   transparent;
     text-color:         @fg0;
