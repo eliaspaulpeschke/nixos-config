@@ -48,7 +48,23 @@ in
 
       servers = {
         nil_ls.enable = true;
+	hls = {
+	  enable = true;
+	  installGhc = true;
+        };
       };
+    };
+
+    plugins.telescope = {
+        enable = true;
+        autoLoad = true;
+        keymaps = {
+            "<leader>ff" = "find_files";
+            "<leader>fg" = "live_grep";
+            "<leader>fb" = "buffers";
+            "<leader>fh" = "help_tags";
+            "<leader>fs" = "grep_string";
+        };
     };
 
     extraPlugins = [(pkgs.vimUtils.buildVimPlugin {
@@ -72,6 +88,15 @@ in
     vim.cmd [[highlight SignColumn guibg=none ctermbg=none]]
     vim.cmd [[highlight EndOfBuffer guibg=none ctermbg=none]]
     vim.cmd [[highlight TablineFill guibg=none ctermbg=none]]
+
+    vim.cmd [[set expandtab]]
+    vim.cmd [[set shiftwidth=4]]
+    vim.cmd [[set autoindent]]
+    vim.cmd [[set smartindent]]
+
+    require('lspconfig')['hls'].setup{
+      filetypes = { 'haskell', 'lhaskell', 'cabal' }, 
+    }
   
 
 '';

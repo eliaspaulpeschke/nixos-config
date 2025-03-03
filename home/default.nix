@@ -1,13 +1,12 @@
 { config, pkgs, inputs, ... }: 
-
 {
 
   home.username = "elias";
   home.homeDirectory = "/home/elias";
 
   home.shellAliases = {
-    fz = "fzf --tmux";
-  };
+    fz = "fzf --tmux"; 
+  }; 
 
   imports = [
      ./nixvim

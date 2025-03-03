@@ -68,8 +68,15 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     git
-    pkgs.xdg-user-dirs
+    xdg-user-dirs
+#    (haskell-language-server.override { 
+#      supportedGhcVersions = [ "966" "912" ];
+#   })
+    haskell-language-server
   ];
+
+
+
 
 environment.variables.EDITOR = "vim";
 
