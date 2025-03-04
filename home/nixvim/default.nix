@@ -9,7 +9,15 @@ in
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-#    colorschemes.catppuccin.enable = true;
+
+    globals.mapleader = " ";
+
+    opts = {
+        expandtab = true;
+        autoindent = true;
+        smartindent = true;
+        shiftwidth = 4;
+    };
 
     plugins.cmp = {
       enable = true;
@@ -77,23 +85,20 @@ in
       };
     })];
 
+    highlight = 
+       (map ( x: { "${x}" = { guibg = "none"; ctermbg = "none"; }; })
+            [ "Normal" 
+              "LineNr" 
+              "Folded" 
+              "NonText" 
+              "SpecialKey"
+              "VertSplit"
+              "SignColumn"
+              "EndOfBuffer"
+              "TablineFill" ] );
+
     extraConfigLua = ''
     vim.cmd [[colorscheme moonfly]]
-    vim.cmd [[highlight Normal guibg=none ctermbg=none]]
-    vim.cmd [[highlight LineNr guibg=none ctermbg=none]]
-    vim.cmd [[highlight Folded guibg=none ctermbg=none]]
-    vim.cmd [[highlight NonText guibg=none ctermbg=none]]
-    vim.cmd [[highlight SpecialKey guibg=none ctermbg=none]]
-    vim.cmd [[highlight VertSplit guibg=none ctermbg=none]]
-    vim.cmd [[highlight SignColumn guibg=none ctermbg=none]]
-    vim.cmd [[highlight EndOfBuffer guibg=none ctermbg=none]]
-    vim.cmd [[highlight TablineFill guibg=none ctermbg=none]]
-
-    vim.cmd [[set expandtab]]
-    vim.cmd [[set shiftwidth=4]]
-    vim.cmd [[set autoindent]]
-    vim.cmd [[set smartindent]]
-
     require('lspconfig')['hls'].setup{
       filetypes = { 'haskell', 'lhaskell', 'cabal' }, 
     }
