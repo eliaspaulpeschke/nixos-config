@@ -42,6 +42,7 @@
     tmux
 
     swaybg
+    xwayland-satellite
   ];
 
   programs.git = {

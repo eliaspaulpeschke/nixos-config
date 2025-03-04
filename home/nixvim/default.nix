@@ -59,7 +59,7 @@ in
         nil_ls.enable = true;
 	hls = {
 	  enable = true;
-	  installGhc = true;
+	  installGhc = false;
         };
       };
     };

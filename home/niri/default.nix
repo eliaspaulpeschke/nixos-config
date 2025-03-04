@@ -16,7 +16,10 @@
 
     spawn-at-startup = [
       { command = ["sleep 15; systemctl --user restart swaybg"]; }
+      { command = ["xwayland-satellite"]; }
     ];
+
+    environment."DISPLAY" = ":0";
 
     layout.default-column-width = { proportion = 1. / 2.; };
 
