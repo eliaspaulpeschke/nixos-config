@@ -32,6 +32,7 @@ in
 	sources = [
 	  { 
 	     name = "nvim_lsp";
+             priority = 10;
 	  }
 	  {
 	    name = "path";
@@ -43,8 +44,7 @@ in
 	  "C-p" = "cmp.mapping.select_prev_item()";
 	  "C-b" = "cmp.mapping.scroll_docs(-4)";
 	  "C-f" = "cmp.mapping.scroll_docs(4)";
-	  "<CR>" = "cmp.mapping.confirm { select = true }";
-	  "C-y" = "cmp.mapping.complete";
+	  "C-y" = "cmp.mapping.confirm { select = true }";
 	};
       };
     };
