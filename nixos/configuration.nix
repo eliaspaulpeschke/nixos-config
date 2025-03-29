@@ -17,7 +17,7 @@
       enablePersistence = true;
   };
 
-  sound.extraConfig = ./asound.conf;
+  sound.extraConfig = builtins.readFile ./asound.conf;
 
 
   # Bootloader.
