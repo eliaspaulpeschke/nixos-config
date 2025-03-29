@@ -39,12 +39,13 @@ in
 	  }
 	];
 
+
 	mapping = {
-	  "C-n" = "cmp.mapping.select_next_item()";
-	  "C-p" = "cmp.mapping.select_prev_item()";
-	  "C-b" = "cmp.mapping.scroll_docs(-4)";
-	  "C-f" = "cmp.mapping.scroll_docs(4)";
-	  "C-y" = "cmp.mapping.confirm { select = true }";
+	  "<C-n>" = "cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),{'i','c'})";
+	  "<C-p>" = "cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),{'i','c'})";
+          "<C-b>" = "cmp.mapping.scroll_docs(-4)";
+	  "<C-f>" = "cmp.mapping.scroll_docs(4)";
+	  "<C-y>" = "cmp.mapping.confirm { select = true }";
 	};
       };
     };
@@ -61,6 +62,10 @@ in
 	  enable = true;
 	  installGhc = false;
         };
+      };
+
+      keymaps.diagnostic = {
+          "<C-d>" = "open_float";
       };
     };
 

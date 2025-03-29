@@ -12,6 +12,13 @@
     ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  hardware.alsa = { 
+      enable = true;
+      enablePersistence = true;
+  };
+
+  sound.extraConfig = ./asound.conf;
+
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
