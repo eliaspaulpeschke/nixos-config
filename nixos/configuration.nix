@@ -12,12 +12,20 @@
     ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  hardware.alsa = { 
+  hardware.bluetooth = {
       enable = true;
-      enablePersistence = true;
   };
 
-  sound.extraConfig = builtins.readFile ./asound.conf;
+  services.pipewire = {
+      enable = true;
+      audio.enable = true;
+      pulse.enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      jack.enable = true;
+  };
 
 
   # Bootloader.
@@ -80,6 +88,7 @@
 #      supportedGhcVersions = [ "966" "912" ];
 #   })
     haskell-language-server
+    brightnessctl
   ];
 
 
@@ -103,10 +112,21 @@ environment.variables.EDITOR = "vim";
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
+  services.actkbd = {
+      enable = true;
+      bindings = [
+          { keys = [ 224 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/brightnessctl s 5%-"; }
+          { keys = [ 225 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/brightnessctl s +5%"; }
+      ];
+  };
+
+
   fonts.packages = with pkgs; [
     nerd-fonts.geist-mono
     nerd-fonts.fira-mono
   ];
+
+  security.rtkit.enable = true;
 
 
 

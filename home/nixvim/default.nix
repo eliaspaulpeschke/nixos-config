@@ -62,6 +62,7 @@ in
 	  enable = true;
 	  installGhc = false;
         };
+        clangd.enable = true;
       };
 
       keymaps.diagnostic = {

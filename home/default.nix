@@ -43,6 +43,7 @@
 
     swaybg
     xwayland-satellite
+    telegram-desktop
   ];
 
   programs.git = {

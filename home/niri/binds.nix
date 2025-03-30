@@ -32,6 +32,8 @@
     "Mod+8".action = focus-workspace 8;
     "Mod+9".action = focus-workspace 9;
 
+    "XF86MonBrightnessUp".action = spawn "brightnessctl s +10%";
+    "XF86MonBrightnessDown".action = spawn "brightnessctl s -10%";
     #Move
     "Mod+Shift+Left".action = move-column-left-or-to-monitor-left;
     "Mod+Shift+Right".action = move-column-right-or-to-monitor-right;

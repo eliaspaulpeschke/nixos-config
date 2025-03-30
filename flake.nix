@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,7 +22,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, niri, nixvim, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, niri, nixvim, nixos-hardware, ... }@inputs: {
 
 
 
@@ -34,6 +36,7 @@
 
 	./nixos
 
+        nixos-hardware.nixosModules.lenovo-thinkpad-t495
 
 	niri.nixosModules.niri
 
