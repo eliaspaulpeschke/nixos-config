@@ -23,6 +23,8 @@
     unzip
     p7zip
 
+    chromium
+
     ripgrep
     fzf
 
@@ -44,6 +46,7 @@
     swaybg
     xwayland-satellite
     telegram-desktop
+    emanote
   ];
 
   programs.git = {

@@ -16,6 +16,8 @@
       enable = true;
   };
 
+  hardware.keyboard.qmk.enable = true; 
+
   services.pipewire = {
       enable = true;
       audio.enable = true;

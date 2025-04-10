@@ -8,8 +8,10 @@
   programs.niri.settings = {
 
     input.keyboard.xkb = {
-      layout = "us";
+      layout = "us,us";
       model = "pc104";
+      variant = "colemak_dh,";
+      options = "grp:alt_space_toggle";
     };
 
     prefer-no-csd = true;
