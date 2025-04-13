@@ -104,6 +104,7 @@ documentation = {
         enable = true;
         includeAllModules = true;
         options.splitBuild = true;
+        options.warningsAreErrors = false;
     };
     man = {
         enable = true;
