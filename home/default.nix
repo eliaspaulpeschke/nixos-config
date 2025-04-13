@@ -47,6 +47,7 @@
     xwayland-satellite
     telegram-desktop
     emanote
+    swaylock-effects
   ];
 
   programs.git = {

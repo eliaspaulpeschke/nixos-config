@@ -86,6 +86,8 @@
     wget
     git
     xdg-user-dirs
+    man-pages
+    man-pages-posix
 #    (haskell-language-server.override { 
 #      supportedGhcVersions = [ "966" "912" ];
 #   })
@@ -93,8 +95,22 @@
     brightnessctl
   ];
 
-
-
+documentation = {
+    enable = true;
+    dev.enable = true;
+    info.enable = true;
+    doc.enable = true;
+    nixos = { 
+        enable = true;
+        includeAllModules = true;
+        options.splitBuild = true;
+    };
+    man = {
+        enable = true;
+        man-db.enable = true;
+        generateCaches = true;
+    };
+};
 
 environment.variables.EDITOR = "vim";
 
