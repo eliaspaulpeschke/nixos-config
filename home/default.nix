@@ -46,8 +46,10 @@
     swaybg
     xwayland-satellite
     telegram-desktop
-    emanote
+    #emanote
     swaylock-effects
+
+    google-chrome
   ];
 
   programs.git = {
