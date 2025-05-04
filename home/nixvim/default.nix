@@ -58,6 +58,7 @@ in
 
       servers = {
         nil_ls.enable = true;
+        uiua.enable = true;
 	hls = {
 	  enable = true;
 	  installGhc = false;
