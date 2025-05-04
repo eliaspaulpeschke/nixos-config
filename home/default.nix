@@ -50,6 +50,7 @@
     swaylock-effects
 
     google-chrome
+    exercism
   ];
 
   programs.git = {
