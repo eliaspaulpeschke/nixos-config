@@ -72,7 +72,7 @@
   users.users.elias = {
     isNormalUser = true;
     description = "Elias Peschke";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "dialout" "plugdev"];
     packages = with pkgs; [];
   };
 
@@ -88,14 +88,13 @@
     xdg-user-dirs
     man-pages
     man-pages-posix
-#    (haskell-language-server.override { 
-#      supportedGhcVersions = [ "966" "912" ];
-#   })
-    haskell-language-server
+    (haskell-language-server.override { 
+              supportedGhcVersions = [ "966" "984"];
+   })
     brightnessctl
   ];
 
-documentation = {
+ documentation = {
     enable = true;
     dev.enable = true;
     info.enable = true;
@@ -111,9 +110,9 @@ documentation = {
         man-db.enable = true;
         generateCaches = true;
     };
-};
+ };
 
-environment.variables.EDITOR = "vim";
+ environment.variables.EDITOR = "vim";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -123,6 +122,9 @@ environment.variables.EDITOR = "vim";
      enableSSHSupport = true;
    };
 
+  programs.adb.enable = true;
+
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -130,6 +132,13 @@ environment.variables.EDITOR = "vim";
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+
+  services.udev = { 
+      packages = [
+        pkgs.android-udev-rules
+      ];
+      extraRules = (builtins.readFile ./udev-rules-mtkclient/50-android.rules) + "\n\n" + (builtins.readFile ./udev-rules-mtkclient/51-edl.rules);
+  };
 
   services.actkbd = {
       enable = true;
@@ -144,6 +153,8 @@ environment.variables.EDITOR = "vim";
     nerd-fonts.geist-mono
     nerd-fonts.fira-mono
   ];
+  
+  virtualisation.waydroid.enable = true;
 
   security.rtkit.enable = true;
 

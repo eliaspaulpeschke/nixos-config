@@ -58,7 +58,11 @@ in
 
       servers = {
         nil_ls.enable = true;
-        uiua.enable = true;
+        uiua = {
+            enable = true;
+        #    filetypes = [ "uiua" ];
+         #   rootMarkers = [ "main.ua" ".fmt.ua" ".git" ".uiua-root" ];
+        };
 	hls = {
 	  enable = true;
 	  installGhc = false;
@@ -83,15 +87,26 @@ in
         };
     };
 
-    extraPlugins = [(pkgs.vimUtils.buildVimPlugin {
-      name = "moonfly";
-      src = pkgs.fetchFromGitHub {
-        owner = "bluz71";
-        repo = "vim-moonfly-colors";
-        rev = "9b3d08ccd2152a9a6694ce64bd57b1e19662f3c9";
-        hash = "sha256-1BurRJ0TnLSihXZXtr6BMGuvlYnnc3fER4oKQa+2E5w=";
-      };
-    })];
+    extraPlugins = [
+        (pkgs.vimUtils.buildVimPlugin {
+          name = "moonfly";
+          src = pkgs.fetchFromGitHub {
+            owner = "bluz71";
+            repo = "vim-moonfly-colors";
+            rev = "9b3d08ccd2152a9a6694ce64bd57b1e19662f3c9";
+            hash = "sha256-1BurRJ0TnLSihXZXtr6BMGuvlYnnc3fER4oKQa+2E5w=";
+          };
+        })
+        (pkgs.vimUtils.buildVimPlugin {
+          name = "uiua";
+          src = pkgs.fetchFromGitHub {
+            owner = "Apeiros-46B";
+            repo = "uiua.vim";
+            rev = "99972deb001c7e527348c190d9e5b78abf6d574b";
+            hash = "sha256-NfLZkyUAccVtZ0Rc0+o3PbgbI2L7ggM5VHq60cg/RXU=";
+           };
+        })
+    ];
 
     extraConfigLua = ''
 

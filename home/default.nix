@@ -43,6 +43,9 @@
     lynx
     tmux
 
+    gimp3-with-plugins
+    inkscape-with-extensions
+
     swaybg
     xwayland-satellite
     telegram-desktop
