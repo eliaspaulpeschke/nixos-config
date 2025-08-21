@@ -103,6 +103,11 @@ in
 
     plugins.luasnip = {
         enable = true;
+        autoLoad = true;
+        filetypeExtend = {
+            plaintex = [ "plaintex" "latex" "markdown" ];
+        };
+        fromSnipmate = [ { paths = ./snippets; } ];
     };
 
     extraPlugins = [
@@ -141,11 +146,11 @@ in
 
         require('lspconfig')['hls'].setup{
           filetypes = { 'haskell', 'lhaskell', 'cabal' }, 
-        }
+        } 
+        '';
 
-        local ls = require("luasnip")
-        require("luasnip.loaders.from_snipmate").load({ path = { "${./snippets}" } })
-    '';
+      #  local ls = require("luasnip")
+       # require("luasnip.loaders.from_snipmate").load({ path = { "${./snippets}" } })
 
   };
 }
