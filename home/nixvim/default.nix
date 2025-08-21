@@ -34,6 +34,10 @@ in
 	     name = "nvim_lsp";
              priority = 10;
 	  }
+          {
+             name = "luasnip";
+             priority = 5;
+          }
 	  {
 	    name = "path";
 	  }
@@ -46,12 +50,22 @@ in
           "<C-b>" = "cmp.mapping.scroll_docs(-4)";
 	  "<C-f>" = "cmp.mapping.scroll_docs(4)";
 	  "<C-y>" = "cmp.mapping.confirm { select = true }";
+          "<C-Tab>" = ''
+              cmp.mapping(function(fallback)
+                local luasnip = require('luasnip')
+                if luasnip.expandable() then 
+                    luasnip.expand()
+                elseif luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
+                end
+              end, {"i", "s"})'';
+          };
 	};
       };
-    };
 
     plugins.cmp-nvim-lsp.enable = true;
     plugins.cmp-path.enable = true;
+    plugins.cmp_luasnip.enable = true;
 
     plugins.lsp = {
       enable = true; 
@@ -87,8 +101,12 @@ in
         };
     };
 
+    plugins.luasnip = {
+        enable = true;
+    };
+
     extraPlugins = [
-        (pkgs.vimUtils.buildVimPlugin {
+       (pkgs.vimUtils.buildVimPlugin {
           name = "moonfly";
           src = pkgs.fetchFromGitHub {
             owner = "bluz71";
@@ -124,6 +142,9 @@ in
         require('lspconfig')['hls'].setup{
           filetypes = { 'haskell', 'lhaskell', 'cabal' }, 
         }
+
+        local ls = require("luasnip")
+        require("luasnip.loaders.from_snipmate").load({ path = { "${./snippets}" } })
     '';
 
   };

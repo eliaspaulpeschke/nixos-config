@@ -24,6 +24,7 @@
     p7zip
 
     chromium
+    obsidian
 
     ripgrep
     fzf

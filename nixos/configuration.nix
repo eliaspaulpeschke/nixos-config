@@ -133,6 +133,8 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
+  programs.fuse.userAllowOther = true;
+
   services.udev = { 
       packages = [
         pkgs.android-udev-rules
