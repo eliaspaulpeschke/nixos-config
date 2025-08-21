@@ -106,6 +106,7 @@ in
         autoLoad = true;
         filetypeExtend = {
             plaintex = [ "plaintex" "latex" "markdown" ];
+            markdown = [ "latex" "markdown" ];
         };
         fromSnipmate = [ { paths = ./snippets; } ];
     };
