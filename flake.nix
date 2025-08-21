@@ -43,7 +43,7 @@
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true; 
-          home-manager.sharedModules = [ nixvim.homeManagerModules.nixvim ]; 
+          home-manager.sharedModules = [ nixvim.homeModules.nixvim ]; 
 	  home-manager.extraSpecialArgs = { inherit inputs; };
 	  home-manager.backupFileExtension = "bak";
           home-manager.users.elias = import ./home;
