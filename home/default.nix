@@ -57,6 +57,7 @@
     exercism
     zathura
     texliveMedium
+    latexrun
   ];
 
   programs.git = {
