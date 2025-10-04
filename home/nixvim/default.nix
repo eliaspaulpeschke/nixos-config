@@ -35,6 +35,10 @@ in
              priority = 10;
 	  }
           {
+              name = "vimtex";
+              priority = 7;
+          }
+          {
              name = "luasnip";
              priority = 5;
           }
@@ -66,6 +70,15 @@ in
     plugins.cmp-nvim-lsp.enable = true;
     plugins.cmp-path.enable = true;
     plugins.cmp_luasnip.enable = true;
+    plugins.cmp-vimtex.enable = true;
+
+    plugins.vimtex = {
+        enable = true;
+        settings = {
+            compiler_method = "latexrun";
+            view_method = "zathura";
+        };
+    };
 
     plugins.lsp = {
       enable = true; 
