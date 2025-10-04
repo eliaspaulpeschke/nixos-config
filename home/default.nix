@@ -55,6 +55,7 @@
 
     google-chrome
     exercism
+    zathura
   ];
 
   programs.git = {
