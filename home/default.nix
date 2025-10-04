@@ -56,6 +56,7 @@
     google-chrome
     exercism
     zathura
+    texliveMedium
   ];
 
   programs.git = {
