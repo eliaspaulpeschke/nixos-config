@@ -96,17 +96,20 @@ in
         };
 	hls = {
 	  enable = true;
-	  installGhc = false;
           settings = {
               filetypes = [ "haskell" "lhaskell" "cabal" ];
+	      installGhc = false;
           };
         };
         clangd.enable = true;
       };
 
-      keymaps.diagnostic = {
-          "<C-d>" = "open_float";
-      };
+      keymaps = [
+          {
+          key = "<C-d>";
+          action = helpers.mkRaw "function() vim.diagnostic.open_float() end";
+          }
+       ];
     };
 
     plugins.telescope = {
