@@ -58,6 +58,7 @@
     zathura
     texliveMedium
     latexrun
+    texpresso
   ];
 
   programs.git = {

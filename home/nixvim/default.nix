@@ -20,6 +20,10 @@ in
     };
     plugins.web-devicons.enable = true;
 
+    plugins.texpresso = {
+        enable = true;
+    };
+
     plugins.cmp = {
       enable = true;
 
