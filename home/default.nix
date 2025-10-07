@@ -1,4 +1,9 @@
 { config, pkgs, inputs, ... }: 
+let
+    tex = (pkgs.texlive.combine {
+        inherit (pkgs.texlive) scheme-basic subfiles standalone;
+        });
+in
 {
 
   home.username = "elias";
@@ -56,9 +61,9 @@
     google-chrome
     exercism
     zathura
-    texliveMedium
     latexrun
     texpresso
+    tex
   ];
 
   programs.git = {
