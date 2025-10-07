@@ -112,6 +112,8 @@ in
        ];
     };
 
+    plugins.lspconfig.enable = true;
+
     plugins.telescope = {
         enable = true;
         autoLoad = true;
