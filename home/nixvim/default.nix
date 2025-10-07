@@ -158,7 +158,7 @@ in
         vim.cmd [[highlight EndOfBuffer guibg=none ctermbg=none]]
         vim.cmd [[highlight TablineFill guibg=none ctermbg=none]]
 
-        require('lspconfig')['hls'].setup{
+        vim.lsp.config['hls'].setup{
           filetypes = { 'haskell', 'lhaskell', 'cabal' }, 
         } 
         '';
