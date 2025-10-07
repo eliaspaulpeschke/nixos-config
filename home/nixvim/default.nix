@@ -18,6 +18,7 @@ in
         smartindent = true;
         shiftwidth = 4;
     };
+
     plugins.web-devicons.enable = true;
 
     plugins.texpresso = {
@@ -84,7 +85,7 @@ in
         };
     };
 
-    plugins.lsp = {
+    lsp = {
       enable = true; 
 
       servers = {
@@ -97,6 +98,9 @@ in
 	hls = {
 	  enable = true;
 	  installGhc = false;
+          settings = {
+              filetypes = [ "haskell" "lhaskell" "cabal" ];
+          };
         };
         clangd.enable = true;
       };
@@ -162,9 +166,6 @@ in
         vim.cmd [[highlight EndOfBuffer guibg=none ctermbg=none]]
         vim.cmd [[highlight TablineFill guibg=none ctermbg=none]]
 
-        vim.lsp.config['hls'].setup{
-          filetypes = { 'haskell', 'lhaskell', 'cabal' }, 
-        } 
         '';
 
       #  local ls = require("luasnip")
