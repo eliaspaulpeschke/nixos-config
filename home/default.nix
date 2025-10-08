@@ -1,9 +1,4 @@
 { config, pkgs, inputs, ... }: 
-let
-    tex = (pkgs.texlive.combine {
-        inherit (pkgs.texlive) scheme-basic subfiles standalone;
-        });
-in
 {
 
   home.username = "elias";
@@ -63,8 +58,12 @@ in
     zathura
     latexrun
     texpresso
-    tex
   ];
+
+  programs.texlive = {
+      enable = true;
+      extraPackages = tpkgs: {inherit (tpkgs) collection-mathscience collection-fontsrecommended collection-latexrecommended collection-basic collection-luatex standalone; };
+  };
 
   programs.git = {
     enable = true;
