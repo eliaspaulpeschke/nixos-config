@@ -62,7 +62,7 @@
 
   programs.texlive = {
       enable = true;
-      extraPackages = tpkgs: {inherit (tpkgs) collection-mathscience collection-fontsrecommended collection-latexrecommended collection-basic collection-luatex standalone; };
+      extraPackages = tpkgs: {inherit (tpkgs) collection-mathscience collection-fontsrecommended collection-latexrecommended collection-basic collection-luatex standalone gincltex svn-prov; };
   };
 
   programs.git = {
