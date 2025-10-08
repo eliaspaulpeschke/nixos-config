@@ -86,7 +86,6 @@ in
     };
 
     lsp = {
-
       servers = {
         nil_ls.enable = true;
         uiua = {
@@ -130,7 +129,7 @@ in
         enable = true;
         autoLoad = true;
         filetypeExtend = {
-            plaintex = [ "plaintex" "latex" "markdown" ];
+            tex = [ "plaintex" "latex" "markdown" ];
             markdown = [ "latex" "markdown" ];
         };
         fromSnipmate = [ { paths = ./snippets; } ];
