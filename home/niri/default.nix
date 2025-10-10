@@ -24,7 +24,7 @@
 
     prefer-no-csd = true;
 
-    warp-mouse-to-focus = {
+    input.warp-mouse-to-focus = {
         enable = true;
         mode = "center-xy-always";
     };
