@@ -8,13 +8,26 @@
   programs.niri.settings = {
 
     input.keyboard.xkb = {
-      layout = "us,us";
+      layout = "us,us,de";
       model = "pc104";
-      variant = "colemak_dh,";
+      variant = "colemak_dh,,";
       options = "grp:alt_space_toggle";
     };
 
+    input.tablet = {
+        map-to-output = "eDP-1";
+    };
+
+    input.touch = {
+        map-to-output = "eDP-1";
+    };
+
     prefer-no-csd = true;
+
+    warp-mouse-to-focus = {
+        enable = true;
+        mode = "center-xy-always";
+    };
 
     spawn-at-startup = [
       { command = ["sleep 15; systemctl --user restart swaybg"]; }
