@@ -66,6 +66,14 @@
       extraPackages = tpkgs: {inherit (tpkgs) collection-mathscience collection-fontsrecommended collection-latexrecommended collection-fontutils collection-pictures collection-xetex collection-langenglish collection-latex collection-latexextra collection-langgerman collection-fontsextra collection-basic standalone gincltex svn-prov import; };
   };
 
+  programs.obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [
+          wlrobs
+          obs-vaapi
+      ];
+  };
+
   programs.git = {
     enable = true;
     userName = "Elias Peschke";
