@@ -99,7 +99,8 @@
     man-pages
     man-pages-posix
     (haskell-language-server.override { 
-              supportedGhcVersions = [ "967" "984"];
+              supportedGhcVersions = [ "96" "98"];
+              
    })
     brightnessctl
   ];
