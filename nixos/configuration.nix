@@ -147,9 +147,9 @@
   programs.fuse.userAllowOther = true;
 
   services.udev = { 
-      packages = [
-        pkgs.android-udev-rules
-      ];
+   #   packages = [
+   #     pkgs.android-udev-rules
+   #   ];
       extraRules = (builtins.readFile ./udev-rules-mtkclient/50-android.rules) + "\n\n" + (builtins.readFile ./udev-rules-mtkclient/51-edl.rules);
   };
 
