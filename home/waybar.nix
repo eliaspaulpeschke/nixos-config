@@ -10,6 +10,7 @@
        modules-center = [ "niri/window" ];
        modules-left = [ "niri/workspaces" ];
        modules-right = [ 
+         "pulseaudio"
          "network"
 	 "cpu"
 	 "memory"
@@ -17,6 +18,10 @@
 	 "clock"
 	 "tray"
 	 ];
+       pulseaudio = {
+           format = "snd {icon} {volume}%";
+           on-click = "pavucontrol";
+       };
        battery = {
          format = "bat {capacity}%";
          format-charging = "charging {capacity}%";
