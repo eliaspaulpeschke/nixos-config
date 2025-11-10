@@ -37,7 +37,12 @@
       jack.enable = true;
   };
 
-
+  services.smartd = {
+      enable = true;
+      devices = [
+        { device = "/dev/disk/by-id/nvme-SAMSUNG_MZVLB256HBHQ-000L7_S4ELNF6N500977"; }
+        ];
+  };
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -93,6 +98,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     pamixer
     pavucontrol
+    smartmontools
     wev
     socat
     wget
