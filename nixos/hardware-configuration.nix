@@ -10,9 +10,16 @@
 
   boot.initrd.availableKernelModules = [ "nvme" "ehci_pci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.kernelModules = [ "kvm-amd" "v4l2loopback" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    v4l2loopback
+  ];
 
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  '';
+
+   
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/4fe29130-3b08-4e36-8609-5a6be565ae44";
       fsType = "ext4";
@@ -27,6 +34,11 @@
   swapDevices =
     [ { device = "/dev/disk/by-uuid/bc8d04c7-de80-47cd-afed-a15fdc8bfb74"; }
     ];
+
+    hardware = {
+        bluetooth.enable = true;
+        keyboard.qmk.enable = true;
+        };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
