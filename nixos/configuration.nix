@@ -86,7 +86,7 @@
     isNormalUser = true;
     description = "Elias Peschke";
     extraGroups = [ "networkmanager" "wheel" "adbusers" "dialout" "plugdev"];
-    packages = with pkgs; [];
+    #packages = with pkgs; [];
   };
 
   # Allow unfree packages
@@ -119,9 +119,9 @@
     info.enable = true;
     doc.enable = true;
     nixos = { 
-        enable = true;
-        includeAllModules = true;
-        options.splitBuild = true;
+        enable = false;
+        includeAllModules = false;
+        options.splitBuild = false;
         options.warningsAreErrors = false;
     };
     man = {
