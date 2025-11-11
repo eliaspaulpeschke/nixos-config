@@ -59,6 +59,7 @@
     zathura
     latexrun
     texpresso
+
   ];
 
   programs.texlive = {
@@ -76,8 +77,11 @@
 
   programs.git = {
     enable = true;
-    userName = "Elias Peschke";
-    userEmail = "eliaspeschke@googlemail.com";
+    settings = {
+        user.name = "Elias Peschke";
+        user.email = "eliaspeschke@googlemail.com";
+        init.defaultBranch = "main";
+    };
   };
 
   programs.ssh = {

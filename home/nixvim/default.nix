@@ -102,7 +102,7 @@ in
         };
 	hls = {
 	  enable = true;
-          settings = {
+          config = {
               filetypes = [ "haskell" "lhaskell" "cabal" ];
 	      installGhc = false;
           };
