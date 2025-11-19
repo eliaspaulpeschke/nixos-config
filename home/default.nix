@@ -9,6 +9,7 @@
   }; 
 
   imports = [
+     ./pandoc
      ./nixvim
      ./style
      ./waybar.nix
