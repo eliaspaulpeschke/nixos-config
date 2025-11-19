@@ -51,6 +51,7 @@
     swaybg
     xwayland-satellite
     telegram-desktop
+    signal-desktop
     #emanote
     swaylock-effects
 
