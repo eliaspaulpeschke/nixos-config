@@ -95,6 +95,10 @@ in
     lsp = {
       servers = {
         nil_ls.enable = true;
+        pylsp = {
+            enable = true;
+            packageFallback = true;
+        };
         uiua = {
             enable = true;
         #    filetypes = [ "uiua" ];
