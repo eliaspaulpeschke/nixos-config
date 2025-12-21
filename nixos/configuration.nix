@@ -95,9 +95,9 @@
     xdg-user-dirs
     man-pages
     man-pages-posix
-    (haskell-language-server .override { 
-             supportedGhcVersions = [ "96" "910"];
-    })
+    #(haskell-language-server .override { 
+    #         supportedGhcVersions = [ "96" "910"];
+    #})
     brightnessctl
   ];
 
