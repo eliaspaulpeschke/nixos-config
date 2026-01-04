@@ -15,6 +15,7 @@
      ./waybar.nix
      ./alacritty.nix
      ./rofi
+     ./sway
      ./niri
      ];
 

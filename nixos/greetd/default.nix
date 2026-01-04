@@ -5,10 +5,6 @@ let
 in
 {
 #     imports = [ ./style.nix ./binds.nix ];
-     programs.niri = {
-       enable = true;
-       package = pkgs.niri-unstable;
-     };
      services.greetd = {
         enable = true;
 	settings = {

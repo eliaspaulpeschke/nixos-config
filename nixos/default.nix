@@ -2,6 +2,6 @@
 {
   imports = [
     ./configuration.nix
-    ./niri
+    ./greetd
   ];
 }
