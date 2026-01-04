@@ -10,7 +10,7 @@
     input.keyboard.xkb = {
       layout = "us,us,de";
       model = "pc104";
-      variant = "colemak_dh,,";
+      variant = ",colemak_dh,";
       options = "grp:alt_space_toggle";
     };
 

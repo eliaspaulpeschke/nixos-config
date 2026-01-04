@@ -1,7 +1,8 @@
 {pkgs,inputs, ...}:
 let
   tuigreet = "${pkgs.tuigreet}/bin/tuigreet";
-  niri-session = "${pkgs.niri-unstable}/bin/niri-session";
+  #niri-session = "${pkgs.niri-unstable}/bin/niri-session";
+  sway = "${pkgs.sway}/bin/sway";
 in
 {
 #     imports = [ ./style.nix ./binds.nix ];
@@ -9,7 +10,7 @@ in
         enable = true;
 	settings = {
 	  default_session = {
-	    command = "${tuigreet} --time --remember --cmd ${niri-session}"; 
+	    command = "${tuigreet} --time --remember --cmd ${sway}"; 
 	    user = "elias";
 	  };
 	};
