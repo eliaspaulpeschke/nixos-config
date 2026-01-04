@@ -4,8 +4,8 @@
         enable = true;
         config = {
             gaps = {
-                inner = 5;
-                outer = 12;
+                inner = 12;
+                outer = 48;
             };
             floating.border = 1;
             window.border = 1;
