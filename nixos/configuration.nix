@@ -96,6 +96,7 @@
     man-pages
     man-pages-posix
     openvpn
+    openresolv
     #(haskell-language-server .override { 
     #         supportedGhcVersions = [ "96" "910"];
     #})
