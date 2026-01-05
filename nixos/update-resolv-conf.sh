@@ -21,7 +21,7 @@
 ## PATH below. You might need to directly set the path to 'resolvconf'
 ## manually if it still doesn't work, i.e.
 ## RESOLVCONF=/usr/sbin/resolvconf
-export PATH=$PATH:/sbin:/usr/sbin:/bin:/usr/bin
+export PATH=$PATH:/sbin:/usr/sbin:/bin:/usr/bin:/run/current-system/sw/bin
 RESOLVCONF=$(type -p resolvconf)
 
 case $script_type in
