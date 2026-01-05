@@ -95,6 +95,7 @@
     xdg-user-dirs
     man-pages
     man-pages-posix
+    openvpn
     #(haskell-language-server .override { 
     #         supportedGhcVersions = [ "96" "910"];
     #})
