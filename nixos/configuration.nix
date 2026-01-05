@@ -123,6 +123,13 @@
 
  environment.variables.EDITOR = "vim";
 
+ environment.etc = {
+     "openvpn/update-resolv-conf" = {
+         source = ./update-resolv-conf.sh;
+         mode = "0700";
+     };
+ };
+
  programs.niri = {
    enable = true;
    package = pkgs.niri-unstable;
