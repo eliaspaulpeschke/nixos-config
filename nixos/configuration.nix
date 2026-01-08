@@ -97,6 +97,7 @@
     man-pages-posix
     openvpn
     openresolv
+    protonvpn-gui
     #(haskell-language-server .override { 
     #         supportedGhcVersions = [ "96" "910"];
     #})

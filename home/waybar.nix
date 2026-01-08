@@ -7,8 +7,8 @@
        height = 30;
        layer = "top";
        position = "top";
-       modules-center = [ "niri/window" ];
-       modules-left = [ "niri/workspaces" ];
+       modules-center = [ "sway/window" ];
+       modules-left = [ "sway/workspaces" ];
        modules-right = [ 
          "pulseaudio"
          "network"

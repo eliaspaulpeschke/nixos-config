@@ -5,6 +5,7 @@
     settings = {
 
       font = {
+        size = 16;
         normal = { family = "GeistMono Nerd Font"; style = "Regular"; };
       };
       

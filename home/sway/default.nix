@@ -18,6 +18,7 @@
                     xkb_model = "pc104";
                 };
             };
+           bars =  [];
 
            modifier = "Mod4";
            keybindings = lib.mkOptionDefault {
