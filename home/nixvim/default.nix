@@ -95,6 +95,7 @@ in
     lsp = {
       servers = {
         nil_ls.enable = true;
+        vtsls.enable = true;
         pylsp = {
             enable = true;
             packageFallback = true;
