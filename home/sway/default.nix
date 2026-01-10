@@ -3,9 +3,14 @@
     wayland.windowManager.sway = {
         enable = true;
         config = {
+            output = {
+                DP-1 = {
+                    scale = "1.5";
+                };
+            };
             gaps = {
-                inner = 12;
-                outer = 48;
+                inner = 5;
+                outer = 5;
             };
             floating.border = 1;
             window.border = 1;
@@ -17,7 +22,11 @@
                     xkb_options = "grp:alt_space_toggle";
                     xkb_model = "pc104";
                 };
+                "type:touchpad" = {
+                    natural_scroll = "enabled";
+                };
             };
+
            bars =  [];
 
            modifier = "Mod4";
@@ -25,8 +34,9 @@
               "Mod4+Return" = "exec alacritty";
               "Mod4+Shift+q" = "kill";
               "Mod4+d" = "exec rofi -show run";
-              "Mod4+s" = "layout stacking";
-              "Mod4+w" = "layout tabbed";
+              "Mod4+s" = "echo 'hello'";
+              "Mod4+w" = "echo 'hello'";
+              "Mod4+o" = "output 'eDP-1' toggle";
            };
             window.titlebar = false;
         };
