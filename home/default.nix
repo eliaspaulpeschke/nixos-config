@@ -63,6 +63,8 @@
     latexrun
     texpresso
 
+    blender
+
   ];
 
   programs.texlive = {
