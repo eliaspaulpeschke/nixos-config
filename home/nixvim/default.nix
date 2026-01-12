@@ -96,9 +96,12 @@ in
       servers = {
         nil_ls.enable = true;
         vtsls.enable = true;
-        pylsp = {
+#        pylsp = {
+#            enable = true;
+#            packageFallback = true;
+#        };
+        ty = {
             enable = true;
-            packageFallback = true;
         };
         uiua = {
             enable = true;
