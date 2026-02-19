@@ -95,6 +95,10 @@ in
     lsp = {
       servers = {
         nil_ls.enable = true;
+        rust_analyzer = {
+            enable = true;
+            packageFallback = true;
+        };
         vtsls.enable = true;
 #        pylsp = {
 #            enable = true;

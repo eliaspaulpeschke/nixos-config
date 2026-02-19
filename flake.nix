@@ -11,10 +11,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     }; 
 
-    niri = {
-     url = "github:sodiboo/niri-flake";
-    };
-
     nixvim = {
      url = "github:nix-community/nixvim";
      inputs.nixpkgs.follows = "nixpkgs";
@@ -22,7 +18,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, niri, nixvim, nixos-hardware, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nixvim, nixos-hardware, ... }@inputs: {
 
 
 
@@ -37,8 +33,6 @@
 	./nixos
 
         nixos-hardware.nixosModules.lenovo-thinkpad-t495
-
-	niri.nixosModules.niri
 
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;

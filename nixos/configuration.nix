@@ -23,7 +23,11 @@
         enable = true;
         support32Bit = true;
       };
-      jack.enable = true;
+      jack = {
+          enable = true;
+
+      };
+      
   };
 
   services.smartd = {
@@ -32,6 +36,45 @@
         { device = "/dev/disk/by-id/nvme-SAMSUNG_MZVLB256HBHQ-000L7_S4ELNF6N500977"; }
         ];
   };
+
+  services.picom = {
+      enable = true;
+      backend = "glx";
+      vSync = true;
+      settings = {
+          blur = {
+              method = "dual_kawase";
+              strength = 7;
+              deviation = 5.0;
+          };
+      };
+  };
+
+  services.xserver = {
+      enable = true;
+      dpi = 144;
+      deviceSection = ''Option "TearFree" "true"'';
+      displayManager = { 
+        lightdm.enable = true;
+      };
+      windowManager.i3 = {
+          enable = true;
+          configFile = ./i3/config;
+      }; 
+    xkb = {
+        layout = "us";
+        variant = "";
+    };
+  };
+
+  services.libinput = {
+      enable = true;
+      touchpad = {
+          tapping = true;
+          naturalScrolling = true;
+      };
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -64,18 +107,12 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.elias = {
     isNormalUser = true;
     description = "Elias Peschke";
     extraGroups = [ "networkmanager" "wheel" "adbusers" "dialout" "plugdev"];
-    #packages = with pkgs; [];
+    packages = with pkgs; [ dmenu ];
   };
 
   # Allow unfree packages
@@ -88,7 +125,7 @@
     pamixer
     pavucontrol
     smartmontools
-    wev
+    xev
     socat
     wget
     git
@@ -97,6 +134,7 @@
     man-pages-posix
     openvpn
     openresolv
+    qjackctl
     protonvpn-gui
     #(haskell-language-server .override { 
     #         supportedGhcVersions = [ "96" "910"];
@@ -122,7 +160,9 @@
     };
  };
 
- environment.variables.EDITOR = "vim";
+ environment.variables = {
+     EDITOR = "vim";
+ };
 
  environment.etc = {
      "openvpn/update-resolv-conf" = {
@@ -130,12 +170,6 @@
          mode = "0700";
      };
  };
-
- programs.niri = {
-   enable = true;
-   package = pkgs.niri-unstable;
- };
-
 
 
   # Some programs need SUID wrappers, can be configured further or are

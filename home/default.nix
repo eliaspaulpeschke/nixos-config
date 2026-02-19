@@ -16,7 +16,7 @@
      ./alacritty.nix
      ./rofi
      ./sway
-     ./niri
+#     ./i3
      ];
 
   home.packages = with pkgs; [
@@ -33,6 +33,7 @@
     fzf
 
     dnsutils
+    lmms
 
     file
     which
@@ -50,8 +51,8 @@
     gimp3-with-plugins
     inkscape-with-extensions
 
-    swaybg
-    xwayland-satellite
+#    swaybg
+#    xwayland-satellite
     telegram-desktop
     signal-desktop
     #emanote
@@ -64,6 +65,7 @@
     texpresso
 
     blender
+    valgrind
 
   ];
 
@@ -121,6 +123,8 @@
   programs.firefox = {
     enable = true;
   };	
+
+  xsession.enable = true;
 
   home.stateVersion = "24.11";
 
