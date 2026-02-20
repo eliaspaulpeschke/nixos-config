@@ -22,7 +22,7 @@
 
     homeConfigurations."peschkee" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      modules = [ ./home/peschkee.nix ];
+      modules = [ ./home/peschkee.nix nixvim.homeModules.nixvim ];
     };
 
     nixosConfigurations.twinkpad = nixpkgs.lib.nixosSystem {
