@@ -95,6 +95,7 @@
       enable = true;
       windowManager.i3 = {
           enable = true;
+          config.bars = []; 
           extraConfig = builtins.readFile ../nixos/i3/config;
       };
   };
