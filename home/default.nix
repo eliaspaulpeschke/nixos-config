@@ -12,10 +12,7 @@
      ./pandoc
      ./nixvim
      ./style
-     ./waybar.nix
      ./alacritty.nix
-     ./rofi
-     ./sway
 #     ./i3
      ];
 

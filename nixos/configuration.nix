@@ -122,6 +122,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    android-tools
+
     pamixer
     pavucontrol
     smartmontools
@@ -179,9 +181,6 @@
      enable = true;
      enableSSHSupport = true;
    };
-
-  programs.adb.enable = true;
-
 
   # List services that you want to enable:
 
