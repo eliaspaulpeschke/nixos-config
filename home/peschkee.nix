@@ -91,11 +91,13 @@
     enable = true;
   };	
 
-  services.xserver = {
+  xsession = {
       enable = true;
+      windowManager.i3 = {
+          enable = true;
+          extraConfig = builtins.readFile ../nixos/i3/config;
+      };
   };
-
-  xsession.enable = true;
 
   home.stateVersion = "25.11";
 
