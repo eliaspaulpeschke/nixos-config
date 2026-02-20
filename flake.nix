@@ -20,7 +20,10 @@
 
   outputs = { self, nixpkgs, home-manager, nixvim, nixos-hardware, ... }@inputs: {
 
-
+    homeConfigurations."peschkee" = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      modules = [ ./home/peschkee.nix ];
+    };
 
     nixosConfigurations.twinkpad = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";  
