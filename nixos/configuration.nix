@@ -190,14 +190,23 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
+  services.upower = {
+      enable = true;
+      criticalPowerAction = "Hibernate";
+      percentageLow = 15;
+      percentageCritical = 10;
+      percentageAction = 5;
+      ignoreLid = true;
+  };
+
   programs.fuse.userAllowOther = true;
 
-  services.udev = { 
+#  services.udev = { 
    #   packages = [
    #     pkgs.android-udev-rules
    #   ];
-      extraRules = (builtins.readFile ./udev-rules-mtkclient/50-android.rules) + "\n\n" + (builtins.readFile ./udev-rules-mtkclient/51-edl.rules);
-  };
+#      extraRules = (builtins.readFile ./udev-rules-mtkclient/50-android.rules) + "\n\n" + (builtins.readFile ./udev-rules-mtkclient/51-edl.rules);
+ # };
 
   services.actkbd = {
       enable = true;
