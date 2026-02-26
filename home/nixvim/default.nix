@@ -17,6 +17,8 @@ in
         autoindent = true;
         smartindent = true;
         shiftwidth = 4;
+        relativenumber = true;
+        statuscolumn = "%{printf('%d:%d', v:lnum, v:relnum)}%= │ ";
     };
 
     plugins.web-devicons.enable = true;
@@ -176,7 +178,6 @@ in
     ];
 
     extraConfigLua = ''
-
         vim.cmd [[colorscheme moonfly]]
         vim.cmd [[highlight Normal guibg=none ctermbg=none]]
         vim.cmd [[highlight LineNr guibg=none ctermbg=none]]
