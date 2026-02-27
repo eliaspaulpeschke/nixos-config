@@ -47,6 +47,13 @@ set $bar_color_workspace_inactive_fg #333333
 set $bar_color_workspace_urgent_bg   #FF3333
 set $bar_color_workspace_urgent_fg   #333333
 
+
+# Make the currently focused window a scratchpad
+bindsym $mod+$smod+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
 ### Applications ###
 # Start a terminal emulator
 bindsym $mod+Return exec $wm_setting_app_terminal
