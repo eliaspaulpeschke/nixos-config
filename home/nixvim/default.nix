@@ -96,6 +96,18 @@ in
 
     lsp = {
       servers = {
+        r_languageserver = {
+            enable = true;
+            packages = null;
+            packageFallback = false;
+            name = "languageserver"; 
+            config = {
+                filetypes = ["r" "R"];
+                cmd = [ "R" "--slave"
+                        "-e" "languageserver::run()" ];
+                root_markers = [ "DESCRIPTION" ".git" ];
+            };
+        };
         nil_ls.enable = true;
         rust_analyzer = {
             enable = true;
