@@ -6,10 +6,6 @@
   targets.genericLinux.enable = true; 
   fonts.fontconfig.enable = true;
 
-  home.shellAliases = {
-    fz = "fzf --tmux"; 
-  }; 
-
   imports = [
      ./pandoc
      ./nixvim
@@ -19,11 +15,15 @@
      ];
 
   home.packages = with pkgs; [
+    xca
+    dmenu
+
     zoom-us
     zip
     xz
     unzip
     p7zip
+    pidgin
 
     chromium
     ripgrep
@@ -83,7 +83,8 @@
     enableCompletion = true;
     bashrcExtra = "set -o vi";
     shellAliases = {
-        track = "python3 track.py";
+        track = "python3 $HOME/.local/bin/track.py";
+        fz = "fzf --tmux"; 
     };
   };
 
@@ -95,7 +96,7 @@
       enable = true;
       windowManager.i3 = {
           enable = true;
-          config.bars = []; 
+          config = null;
           extraConfig = builtins.readFile ../nixos/i3/config;
       };
   };
