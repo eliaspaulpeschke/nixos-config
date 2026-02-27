@@ -101,10 +101,13 @@ in
             packageFallback = false;
             name = "languageserver"; 
             config = {
-                filetypes = ["r" "R"];
+                filetypes = ["r"];
                 cmd = [ "R" "--slave"
                         "-e" "languageserver::run()" ];
                 root_markers = [ "DESCRIPTION" ".git" ];
+                settings = {
+                    diagnostics = false;
+                };
             };
         };
         nil_ls.enable = true;
