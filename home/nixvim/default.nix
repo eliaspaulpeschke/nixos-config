@@ -98,7 +98,6 @@ in
       servers = {
         r_languageserver = {
             enable = true;
-            packages = null;
             packageFallback = false;
             name = "languageserver"; 
             config = {
