@@ -51,6 +51,7 @@
     keepassxc
     pkgs.nerd-fonts.geist-mono
     pkgs.nerd-fonts.fira-mono
+    (pkgs.callPackage ./fonts/default.nix { lib = lib; stdenv = stdenv; })
 
     valgrind
 
