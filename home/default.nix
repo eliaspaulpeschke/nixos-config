@@ -63,7 +63,7 @@
 
     blender
     valgrind
-    kcachegrind
+    kdePackages.kcachegrind
 
   ];
 
