@@ -40,7 +40,6 @@
     pciutils
     usbutils
 
-    tmux
     gimp3-with-plugins
     inkscape-with-extensions
 
@@ -56,6 +55,11 @@
     valgrind
 
   ];
+
+  programs.tmux = {
+      enable = true;
+      extraConfig = builtins.readFile ./tmux.conf;
+  };
 
   programs.texlive = {
       enable = true;
