@@ -17,6 +17,7 @@
   home.packages = with pkgs; [
     xca
     dmenu
+    kdePackages.okular
 
     zoom-us
     zip
@@ -51,9 +52,6 @@
     pkgs.nerd-fonts.geist-mono
     pkgs.nerd-fonts.fira-mono
     (pkgs.callPackage ./fonts/default.nix { lib = lib; stdenv = stdenv; })
-
-    valgrind
-
   ];
 
   programs.tmux = {

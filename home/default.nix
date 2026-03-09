@@ -22,6 +22,7 @@
     xz
     unzip
     p7zip
+    kdePackages.okular
 
     chromium
     obsidian
