@@ -11,7 +11,6 @@
      ./nixvim
      ./style
      ./alacritty.nix
-#     ./i3
      ];
 
   home.packages = with pkgs; [
@@ -100,7 +99,8 @@
       windowManager.i3 = {
           enable = true;
           config = null;
-          extraConfig = builtins.readFile ../nixos/i3/config;
+          extraConfig = builtins.readFile ./i3/config + ''
+          bindsym $mod+Return exec alacritty -e ${pkgs.tmux}/bin/tmux new-session -A -s main'';
       };
   };
 
