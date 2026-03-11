@@ -13,7 +13,7 @@
      ./nixvim
      ./style
      ./alacritty.nix
-#     ./i3
+     ./i3
      ];
 
   home.packages = with pkgs; [
@@ -123,11 +123,8 @@
     enable = true;
   };	
 
-  xsession.enable = true;
-
   home.stateVersion = "24.11";
 
   programs.home-manager.enable = true; 
-
 }
 

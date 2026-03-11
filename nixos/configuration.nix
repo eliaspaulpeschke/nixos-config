@@ -56,12 +56,22 @@
       deviceSection = ''Option "TearFree" "true"'';
       displayManager = { 
         lightdm.enable = true;
+        session = [
+          {
+              name = "i3";
+              manage = "window";
+              start = ''
+              ${pkgs.stdenv.shell} $HOME/.xsession &
+              waitPID=$!
+              '';
+          }
+        ];
       };
-      windowManager.i3 = {
-          enable = true;
-          configFile = ./i3/config;
-      }; 
-    xkb = {
+#      windowManager.i3 = {
+#          enable = true;
+#          configFile = ./i3/config;
+#      }; 
+     xkb = {
         layout = "us";
         variant = "";
     };
