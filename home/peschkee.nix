@@ -4,74 +4,15 @@
   home.username = "peschkee";
   home.homeDirectory = "/home/peschkee";
   targets.genericLinux.enable = true; 
-  fonts.fontconfig.enable = true;
 
   imports = [
-     ./pandoc
-     ./nixvim
-     ./style
-     ./alacritty.nix
-     ./i3
+     ./common
      ];
 
   home.packages = with pkgs; [
     xca
-    dmenu
-    kdePackages.okular
-
-    zoom-us
-    zip
-    xz
-    unzip
-    p7zip
     pidgin
-
-    chromium
-    ripgrep
-    fzf
-
-    dnsutils
-    file
-    which
-    gnutar
-    gnupg
- 
-    htop
-    lsof
-    pciutils
-    usbutils
-
-    gimp3-with-plugins
-    inkscape-with-extensions
-
-    google-chrome
-    zathura
-    latexrun
-    texpresso
-    keepassxc
-    pkgs.nerd-fonts.geist-mono
-    pkgs.nerd-fonts.fira-mono
-    (pkgs.callPackage ./fonts/default.nix { lib = lib; stdenv = stdenv; })
   ];
-
-  programs.tmux = {
-      enable = true;
-      extraConfig = builtins.readFile ./tmux.conf;
-  };
-
-  programs.texlive = {
-      enable = true;
-      extraPackages = tpkgs: {inherit (tpkgs) collection-mathscience collection-fontsrecommended collection-latexrecommended collection-fontutils collection-pictures collection-xetex collection-langenglish collection-latex collection-latexextra collection-langgerman collection-fontsextra collection-basic standalone gincltex svn-prov import; };
-  };
-
-  programs.obs-studio = {
-      enable = true;
-      plugins = with pkgs.obs-studio-plugins; [
-          wlrobs
-          obs-vaapi
-      ];
-  };
-
   programs.git = {
     enable = true;
     settings = {
@@ -80,20 +21,6 @@
         init.defaultBranch = "main";
     };
   };
-
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-    bashrcExtra = "set -o vi";
-    shellAliases = {
-        track = "python3 $HOME/.local/bin/track.py";
-        fz = "fzf --tmux"; 
-    };
-  };
-
-  programs.firefox = {
-    enable = true;
-  };	
 
   home.stateVersion = "25.11";
 
@@ -133,11 +60,6 @@
   #
   #  /etc/profiles/per-user/peschkee/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    KUBU_EDITOR = "nvim";
-  };
-
 
   programs.home-manager.enable = true; 
 }

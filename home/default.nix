@@ -4,82 +4,19 @@
   home.username = "elias";
   home.homeDirectory = "/home/elias";
 
-  home.shellAliases = {
-    fz = "fzf --tmux"; 
-  }; 
-
   imports = [
-     ./pandoc
-     ./nixvim
-     ./style
-     ./alacritty.nix
-     ./i3
+     ./common
      ];
 
   home.packages = with pkgs; [
-    zoom-us
-    zip
-    xz
-    unzip
-    p7zip
-    kdePackages.okular
-
-    chromium
-    obsidian
-
-    ripgrep
-    fzf
-
-    dnsutils
     lmms
-
-    file
-    which
-    gnutar
-    gnupg
- 
-    htop
-    lsof
-    pciutils
-    usbutils
-
-    lynx
-    tmux
-
-    gimp3-with-plugins
-    inkscape-with-extensions
-
-#    swaybg
-#    xwayland-satellite
     telegram-desktop
     signal-desktop
-    #emanote
-    swaylock-effects
-
-    google-chrome
     exercism
-    zathura
-    latexrun
-    texpresso
-
     blender
     valgrind
     kdePackages.kcachegrind
-
   ];
-
-  programs.texlive = {
-      enable = true;
-      extraPackages = tpkgs: {inherit (tpkgs) collection-mathscience collection-fontsrecommended collection-latexrecommended collection-fontutils collection-pictures collection-xetex collection-langenglish collection-latex collection-latexextra collection-langgerman collection-fontsextra collection-basic standalone gincltex svn-prov import; };
-  };
-
-  programs.obs-studio = {
-      enable = true;
-      plugins = with pkgs.obs-studio-plugins; [
-          wlrobs
-          obs-vaapi
-      ];
-  };
 
   programs.git = {
     enable = true;
@@ -110,18 +47,6 @@
     }; 
     
   };
-
-  programs.fuzzel.enable = true;
-
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-    bashrcExtra = "set -o vi";
-  };
-
-  programs.firefox = {
-    enable = true;
-  };	
 
   home.stateVersion = "24.11";
 

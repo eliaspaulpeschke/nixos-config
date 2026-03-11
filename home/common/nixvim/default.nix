@@ -16,9 +16,9 @@ in
         expandtab = true;
         autoindent = true;
         smartindent = true;
-        shiftwidth = 4;
+        shiftwidth = 2;
         relativenumber = true;
-        statuscolumn = "%{printf('%d:%d', v:lnum, v:relnum)}%= │ ";
+        statuscolumn = "%#StatColLNum#%{printf('%d', v:lnum)}%= %#StatColRelNum#%{printf('%d', v:relnum)}%#StatColBorder#│ ";
     };
 
     plugins.web-devicons.enable = true;
@@ -202,6 +202,18 @@ in
         vim.cmd [[highlight SignColumn guibg=none ctermbg=none]]
         vim.cmd [[highlight EndOfBuffer guibg=none ctermbg=none]]
         vim.cmd [[highlight TablineFill guibg=none ctermbg=none]]
+
+        vim.api.nvim_set_hl(0, "StatColLNum", {
+          fg = "#BBBBBB"
+        });
+        vim.api.nvim_set_hl(0, "StatColRelNum", {
+          fg = "#555555"
+        });
+        vim.api.nvim_set_hl(0, "StatColBorder", {
+          fg = "#333333"
+        });
+
+
 
         '';
 

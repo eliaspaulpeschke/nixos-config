@@ -6,9 +6,9 @@
 set $mod                             Mod4
 set $smod                            Shift
 set $wm_setting_font                 pango:GeistMono Nerd Font 14
-set $wm_setting_gap_width            10
-set $wm_setting_gap_heigth           10
-set $wm_setting_gap_inner            10
+set $wm_setting_gap_width            4
+set $wm_setting_gap_heigth           4
+set $wm_setting_gap_inner            4
 set $wm_setting_border_size          1
 set $wm_setting_key_left             Left
 set $wm_setting_key_down             Down
@@ -33,7 +33,7 @@ set $bar_setting_separator           " | "
 set $bar_setting_statusCommand       i3status
 set $bar_setting_trayoutput          full
 
-set $bar_color_background            #554433
+set $bar_color_background            #494442
 set $bar_color_foreground            #E9DED8
 set $bar_color_statusline            #E9DED8
 set $bar_color_separator             #E9DED8

@@ -1,13 +1,13 @@
 {pkgs,...}:
 {
-   systemd.user.services."swaybg" = {
+   systemd.user.services."background-image" = {
        Unit = {
-         Description = "swaybg";
+         Description = "feh";
        };
        Service = {
           Type = "simple";
           PassEnvironment = "DISPLAY";
-          ExecStart = "${pkgs.swaybg}/bin/swaybg -i ${./wallpaper.jpg}";
+          ExecStart = "${pkgs.feh}/bin/feh --bg-scale ${./wallpaper.jpg}";
 	  Restart = "on-failure";
 	  RestartSec = "10s";
        };
