@@ -15,6 +15,28 @@
 
   security.polkit.enable = true;
 
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.brlaser ];
+  };
+
+ hardware.printers = {
+   ensurePrinters = [
+   {
+     name = "brother";
+     location = "home";
+     deviceUri = "socket://192.168.188.1";
+     model = "drv:///brlaser.drv/br2250d.ppd";
+   }
+   ];
+ };
+
+  #services.avahi = {
+  #  enable = true;
+  #  nssmdns4 = true;
+  #  openFirewall = true;
+  #};
+
   services.pipewire = {
       enable = true;
       audio.enable = true;
