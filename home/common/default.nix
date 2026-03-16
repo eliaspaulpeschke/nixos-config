@@ -9,6 +9,8 @@
      ];
 
   home.packages = with pkgs; [
+    cryptsetup
+    element-desktop
     zoom-us
     zip
     xz
