@@ -22,6 +22,12 @@
     };
   };
 
+  dconf.settings = {
+      "org/gnome/desktop/input-sources" = {
+        xkb-options = ["compose:sclk"];
+      };
+    };
+
   home.stateVersion = "25.11";
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
