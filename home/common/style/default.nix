@@ -12,8 +12,7 @@
 	  RestartSec = "10s";
        };
        Install = {
-
-          WantedBy = [ "graphical-session.target" ];
+          WantedBy = [ "hm-graphical-session.target" ];
        };
    };
 }
