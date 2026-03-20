@@ -13,6 +13,11 @@
     xca
     pidgin
   ];
+
+  programs.bash.profileExtra = ''
+  systemctl --user start setxkbmap.service
+  '';
+
   programs.git = {
     enable = true;
     settings = {
@@ -21,12 +26,6 @@
         init.defaultBranch = "main";
     };
   };
-
-  dconf.settings = {
-      "org/gnome/desktop/input-sources" = {
-        xkb-options = ["compose:sclk"];
-      };
-    };
 
   home.stateVersion = "25.11";
 
