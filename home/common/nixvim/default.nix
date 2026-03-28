@@ -171,6 +171,8 @@ in
     };
 
     extraPlugins = [
+       pkgs.vimPlugins.plenary-nvim
+
        (pkgs.vimUtils.buildVimPlugin {
           name = "moonfly";
           src = pkgs.fetchFromGitHub {
