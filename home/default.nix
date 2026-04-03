@@ -15,6 +15,7 @@
     exercism
     blender
     valgrind
+    tridactyl-native
     kdePackages.kcachegrind
   ];
 
@@ -26,6 +27,8 @@
         init.defaultBranch = "main";
     };
   };
+
+  programs.firefox.nativeMessagingHosts = [pkgs.tridactyl-native];
 
   programs.ssh = {
     enable = true;
