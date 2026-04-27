@@ -9,7 +9,7 @@
      ];
 
   home.packages = with pkgs; [
-    lmms
+    ardour
     telegram-desktop
     signal-desktop
     exercism
