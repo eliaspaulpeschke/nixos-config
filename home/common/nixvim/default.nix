@@ -21,81 +21,109 @@ in
         statuscolumn = "%#StatColLNum#%{printf('%d', v:lnum)}%= %#StatColRelNum#%{printf('%d', v:relnum)}%#StatColBorder#│ ";
     };
 
-    plugins.web-devicons.enable = true;
+    plugins = {
+      web-devicons.enable = true;
+      lspconfig.enable = true;
+      texpresso.enable = true;
 
-    plugins.texpresso = {
+      cmp-nvim-lsp.enable = true;
+      cmp-path.enable = true;
+      cmp_luasnip.enable = true;
+      cmp-vimtex.enable = true;
+
+      cmp = {
         enable = true;
-    };
 
-    plugins.cmp = {
-      enable = true;
+        settings = {
 
-      settings = {
-
-        completion = {
-	  completeopt = "menu,menuone,noinsert";
-	};
-
-	sources = [
-	  { 
-	     name = "nvim_lsp";
-             priority = 10;
-	  }
-          {
-              name = "vimtex";
-              priority = 7;
-          }
-          {
-             name = "luasnip";
-             priority = 5;
-          }
-	  {
-	    name = "path";
-	  }
-	];
-
-
-	mapping = {
-	  "<C-n>" = "cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),{'i','c'})";
-	  "<C-p>" = "cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),{'i','c'})";
-          "<C-b>" = "cmp.mapping.scroll_docs(-4)";
-	  "<C-f>" = "cmp.mapping.scroll_docs(4)";
-	  "<C-y>" = "cmp.mapping.confirm { select = true }";
-          "<Tab>" = ''
-              cmp.mapping(function(fallback)
-                local luasnip = require('luasnip')
-                if luasnip.locally_jumpable(1) then 
-                    luasnip.jump(1)
-                end
-              end, {"i", "s"})'';
-          "<C-Tab>" = ''
-              cmp.mapping(function(fallback)
-                local ls = require('luasnip')
-                if luasnip.locally_jumpable(-1) then 
-                    luasnip.jump(-1)
-                end
-              end, {"i", "s"})'';
+          completion = {
+            completeopt = "menu,menuone,noinsert";
           };
 
-	};
+          sources = [
+            { 
+               name = "nvim_lsp";
+               priority = 10;
+            }
+            {
+                name = "vimtex";
+                priority = 7;
+            }
+            {
+               name = "luasnip";
+               priority = 5;
+            }
+            {
+              name = "path";
+            }
+          ];
+
+
+          mapping = {
+            "<C-n>" = "cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),{'i','c'})";
+            "<C-p>" = "cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),{'i','c'})";
+            "<C-b>" = "cmp.mapping.scroll_docs(-4)";
+            "<C-f>" = "cmp.mapping.scroll_docs(4)";
+            "<C-y>" = "cmp.mapping.confirm { select = true }";
+            "<Tab>" = ''
+                cmp.mapping(function(fallback)
+                  local luasnip = require('luasnip')
+                  if luasnip.locally_jumpable(1) then 
+                      luasnip.jump(1)
+                  end
+                end, {"i", "s"})'';
+            "<C-Tab>" = ''
+                cmp.mapping(function(fallback)
+                  local ls = require('luasnip')
+                  if luasnip.locally_jumpable(-1) then 
+                      luasnip.jump(-1)
+                  end
+                end, {"i", "s"})'';
+            };
+
+          };
+        };
+
+
+      vimtex = {
+          enable = true;
+          texlivePackage = null;
+          settings = {
+              compiler_method = "latexrun";
+              view_method = "zathura";
+          };
       };
 
-    plugins.cmp-nvim-lsp.enable = true;
-    plugins.cmp-path.enable = true;
-    plugins.cmp_luasnip.enable = true;
-    plugins.cmp-vimtex.enable = true;
+      telescope = {
+          enable = true;
+          autoLoad = true;
+          keymaps = {
+              "<leader>ff" = "find_files";
+              "<leader>fg" = "live_grep";
+              "<leader>fb" = "buffers";
+              "<leader>fh" = "help_tags";
+              "<leader>fs" = "grep_string";
+          };
+      };
 
-    plugins.vimtex = {
-        enable = true;
-        texlivePackage = null;
-        settings = {
-            compiler_method = "latexrun";
-            view_method = "zathura";
-        };
+      luasnip = {
+          enable = true;
+          autoLoad = true;
+          filetypeExtend = {
+              tex = [ "plaintex" "latex" "markdown" ];
+              markdown = [ "latex" "markdown" ];
+          };
+          fromSnipmate = [ { paths = ./snippets; } ];
+      };
+
     };
 
     lsp = {
       servers = {
+        wgsl_analyzer = {
+          enable = true;
+          package = null;
+        };
         r_languageserver = {
             enable = true;
             packageFallback = false;
@@ -146,29 +174,6 @@ in
        ];
     };
 
-    plugins.lspconfig.enable = true;
-
-    plugins.telescope = {
-        enable = true;
-        autoLoad = true;
-        keymaps = {
-            "<leader>ff" = "find_files";
-            "<leader>fg" = "live_grep";
-            "<leader>fb" = "buffers";
-            "<leader>fh" = "help_tags";
-            "<leader>fs" = "grep_string";
-        };
-    };
-
-    plugins.luasnip = {
-        enable = true;
-        autoLoad = true;
-        filetypeExtend = {
-            tex = [ "plaintex" "latex" "markdown" ];
-            markdown = [ "latex" "markdown" ];
-        };
-        fromSnipmate = [ { paths = ./snippets; } ];
-    };
 
     extraPlugins = [
        pkgs.vimPlugins.plenary-nvim
@@ -215,12 +220,7 @@ in
           fg = "#333333"
         });
 
-
-
         '';
-
-      #  local ls = require("luasnip")
-       # require("luasnip.loaders.from_snipmate").load({ path = { "${./snippets}" } })
 
   };
 }
