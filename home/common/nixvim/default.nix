@@ -22,10 +22,14 @@ in
     };
 
     plugins = {
-      treesitter.enable = true;
       web-devicons.enable = true;
       lspconfig.enable = true;
       texpresso.enable = true;
+
+      treesitter = {
+        enable = true;
+        autoLoad = true;
+      };
 
       cmp-nvim-lsp.enable = true;
       cmp-path.enable = true;
