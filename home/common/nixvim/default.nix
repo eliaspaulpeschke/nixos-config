@@ -22,6 +22,7 @@ in
     };
 
     plugins = {
+      treesitter.enable = true;
       web-devicons.enable = true;
       lspconfig.enable = true;
       texpresso.enable = true;
