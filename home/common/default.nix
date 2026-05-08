@@ -9,6 +9,7 @@
      ];
 
   home.packages = with pkgs; [
+    xclip
     cryptsetup
     element-desktop
     zoom-us
