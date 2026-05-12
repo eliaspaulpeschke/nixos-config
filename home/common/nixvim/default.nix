@@ -142,7 +142,7 @@ in
                         "-e" "languageserver::run()" ];
                 root_markers = [ "DESCRIPTION" ".git" ];
                 settings = {
-                    diagnostics = false;
+                    diagnostics = true;
                 };
             };
         };
