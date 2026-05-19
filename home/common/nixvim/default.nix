@@ -132,6 +132,10 @@ in
           enable = true;
           package = null;
         };
+        jdtls = {
+          enable = true;
+          package = null;
+        };
         r_languageserver = {
             enable = true;
             packageFallback = false;
