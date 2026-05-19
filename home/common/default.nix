@@ -20,7 +20,6 @@
     kdePackages.okular
     chromium
     ripgrep
-    fzf
     file
     which
     gnutar
@@ -51,6 +50,10 @@
   programs.tmux = {
       enable = true;
       extraConfig = builtins.readFile ./tmux.conf;
+  };
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
   };
 
   programs.bash = {
