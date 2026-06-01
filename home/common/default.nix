@@ -51,6 +51,7 @@
       enable = true;
       extraConfig = builtins.readFile ./tmux.conf;
   };
+
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
@@ -95,4 +96,5 @@
     enable = true;
     configPath = ".mozilla/firefox";
   };	
+
 }

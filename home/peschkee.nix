@@ -14,10 +14,6 @@
     pidgin
   ];
 
-  programs.bash.profileExtra = ''
-  systemctl --user start setxkbmap.service
-  '';
-
   programs.git = {
     enable = true;
     settings = {
@@ -67,5 +63,10 @@
   #
 
   programs.home-manager.enable = true; 
+  # some conflict with debian gnome workaround
+  xsession.windowManager.i3.extraConfig = ''
+    exec "systemctl --user start setxkbmap.service"
+    exec "systemctl --user start background-image.service"
+  '';
 }
 
