@@ -128,6 +128,10 @@ in
 
     lsp = {
       servers = {
+        postgres_lsp = {
+          enable = true;
+          package = null;
+        };
         wgsl_analyzer = {
           enable = true;
           package = null;
