@@ -17,6 +17,7 @@
     valgrind
     tridactyl-native
     kdePackages.kcachegrind
+    kicad
   ];
 
   programs.git = {
