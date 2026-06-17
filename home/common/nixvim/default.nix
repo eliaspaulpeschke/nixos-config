@@ -9,6 +9,7 @@ in
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    nixpkgs.pkgs = pkgs;
 
     globals.mapleader = " ";
 
@@ -159,7 +160,10 @@ in
             enable = true;
             packageFallback = true;
         };
-        vtsls.enable = true;
+        ts_ls = {
+          enable = true;
+          package = null;
+        };
 #        pylsp = {
 #            enable = true;
 #            packageFallback = true;
