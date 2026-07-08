@@ -42,6 +42,7 @@
     pkgs.nerd-fonts.geist-mono
     pkgs.nerd-fonts.fira-mono
     (pkgs.callPackage ./fonts/default.nix { lib = lib; stdenv = stdenv; })
+    (pkgs.callPackage ./i3-battery-popup/default.nix { lib = lib; stdenv = stdenv; })
 
   ];
 
