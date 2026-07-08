@@ -9,6 +9,7 @@
      ];
 
   home.packages = with pkgs; [
+    libnotify
     xclip
     cryptsetup
     element-desktop
