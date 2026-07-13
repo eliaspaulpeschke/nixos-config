@@ -4,7 +4,7 @@ stdenv.mkDerivation rec {
     version = "1.0";
 
     src = builtins.fetchGit { 
-      url = "git@github.com:rjekker/i3-battery-popup.git"; 
+      url = "https://github.com/rjekker/i3-battery-popup.git"; 
       rev = "5d7a1ebbc2969acf35361129c09f0131ec372444";
       ref = "main"; 
     };

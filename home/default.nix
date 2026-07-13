@@ -20,7 +20,7 @@
     kicad
   ];
 
-  services.twmn.enable = true;
+  services.dunst.enable = true;
 
   programs.git = {
     enable = true;
