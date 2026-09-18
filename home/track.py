@@ -205,9 +205,10 @@ def do_balance(cursor: sqlite3.Cursor, start: str, end: str, work: str, vacation
   should_hours -= vacation_amount
   if not silent:
       if should_hours.total_seconds() > work_amount.total_seconds():
-        delta = "\nTo work: ", secs_to_string(int((should_hours - work_amount).total_seconds()))
+        delta = "\nTo work: " + secs_to_string(int((should_hours - work_amount).total_seconds()))
       else:
-        delta = "\nOverhours: ", secs_to_string(int((work_amount - should_hours ).total_seconds()))
+        delta = "\nOverhours: " + secs_to_string(int((work_amount - should_hours ).total_seconds()))
+
       print("Should work: " + secs_to_string(int(should_hours.total_seconds())) +
             "\nhave worked: " + secs_to_string(int(work_amount.total_seconds())) +
             delta)
