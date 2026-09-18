@@ -54,6 +54,14 @@
     
   };
 
+  programs.readline = {
+    enable = true;
+    extraConfig = ''
+      set editing-mode vi
+      set keymap vi
+    '';
+  };
+
   home.stateVersion = "24.11";
 
   programs.home-manager.enable = true; 
