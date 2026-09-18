@@ -39,6 +39,7 @@
     texpresso
     dmenu
     keepassxc
+    google-fonts
 
     pkgs.nerd-fonts.geist-mono
     pkgs.nerd-fonts.fira-mono
