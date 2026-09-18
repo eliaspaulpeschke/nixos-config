@@ -13,6 +13,7 @@ import requests
 VERSION = "0.0.1"
 
 args = None
+holidays = None
 
 @dataclass
 class Daydata:
@@ -165,10 +166,13 @@ def parse_hours(hours: str) -> Tuple[int,int,int] | None:
         return None
 
 def get_holidays(state = "mv") -> List[date] | None:
-    holidays = requests.get("https://get.api-feiertage.de?states=mv").json()
-    if not holidays["status"] == "success":
-        return None
-    return [date.fromisoformat(x["date"]) for x in holidays["feiertage"] if int(x[state]) == 1]
+    global holidays
+    if holidays is None:
+        h = requests.get("https://get.api-feiertage.de?states=mv").json()
+        if not h["status"] == "success":
+            return None
+        holidays = [date.fromisoformat(x["date"]) for x in h["feiertage"] if int(x[state]) == 1]
+    return holidays
 
 def is_holiday(day: date) -> bool:
     holidays = get_holidays()
@@ -191,26 +195,27 @@ def do_balance(cursor: sqlite3.Cursor, start: str, end: str, work: str, vacation
   days = (end - begin).days
   work_amount = timedelta(0)
   vacation_amount = timedelta(0)
-  summary = days_summary(cursor,begin, int(days), silent=True)
+  summary = days_summary(cursor,begin, int(days) + 1, silent=True)
   for k in summary:
       if k in work_types:
           work_amount += summary[k]
       elif k in vacation_types:
           vacation_amount += summary[k]
   should_hours = timedelta(0)
-  for d in range(0, days):
+  for d in range(0, days + 1):
       day = begin + timedelta(days=d)
       if day.isoweekday() <= 5 and not is_holiday(day):
           should_hours += hours
-  should_hours -= vacation_amount
+  #should_hours -= vacation_amount
   if not silent:
-      if should_hours.total_seconds() > work_amount.total_seconds():
-        delta = "\nTo work: " + secs_to_string(int((should_hours - work_amount).total_seconds()))
+      if (should_hours - vacation_amount).total_seconds() > work_amount.total_seconds():
+        delta = "\nTo work: " + secs_to_string(int(((should_hours - vacation_amount) - work_amount).total_seconds()))
       else:
-        delta = "\nOverhours: " + secs_to_string(int((work_amount - should_hours ).total_seconds()))
+        delta = "\nOverhours: " + secs_to_string(int((work_amount - (should_hours - vacation_amount)).total_seconds()))
 
       print("Should work: " + secs_to_string(int(should_hours.total_seconds())) +
             "\nhave worked: " + secs_to_string(int(work_amount.total_seconds())) +
+            "\nhad pause: " + secs_to_string(int(vacation_amount.total_seconds())) +
             delta)
   return {"should": should_hours, "work": work_amount, "vacation": vacation_amount}
 
@@ -312,7 +317,7 @@ def main():
                 print("please enter a valid date")
                 return
             days = (end - begin).days
-            days_summary(cursor,begin,int(days),f"between {begin.isoformat()} and {end.isoformat()}")
+            days_summary(cursor,begin,int(days) + 1,f"between {begin.isoformat()} and {end.isoformat()}")
         case ["add", num, "minutes", "to" , to , "on", on]:
             d = parse_day(on)
             if d == None:
