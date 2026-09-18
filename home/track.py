@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from dataclasses import dataclass
+from typing import Dict, List, Tuple
 import sqlite3
 from argparse import ArgumentParser
 import os
@@ -6,8 +8,16 @@ import time
 import functools
 import math
 from datetime import datetime, date, timedelta
+import requests
 
 VERSION = "0.0.1"
+
+args = None
+
+@dataclass
+class Daydata:
+    amount: timedelta
+    active: bool
 
 def setup_args():
     home = os.environ.get("HOME", "~/")
@@ -49,13 +59,13 @@ def running_seconds(cursor, task) -> timedelta | None:
     now = datetime.now()
     return (now - st)
     
-def day_summary(cursor, date, time_suffix = "today"):
+def day_summary(cursor, date, time_suffix = "today", silent = False) -> Dict[datetime, Dict[str, Daydata]] | None:
     res = cursor.execute("select start, end, name from times join activity on fk_activity = activity_id")
     if (times := res.fetchall()) is None:
         print("Task list still empty")
-        return
+        return None
     times.sort(key = lambda t: int(t[0]))
-    taskdict = {}
+    taskdict: Dict[str, Daydata] = {}
     today = datetime.now().date()
     for (start, end, name) in times:
         start = datetime.fromtimestamp(start)
@@ -64,38 +74,43 @@ def day_summary(cursor, date, time_suffix = "today"):
         end = datetime.fromtimestamp(end)
         amount = end - start
         if name in taskdict:
-            taskdict[name]["amount"] += amount
+            taskdict[name].amount += amount
         else:
-            taskdict[name] = {"amount": amount, "running": False}
+            taskdict[name] = Daydata(amount, False)
             if date == today:
                 am = running_seconds(cursor, name)
                 if am is not None:
-                    taskdict[name]["amount"] += am
-                    taskdict[name]["running"] = True
-    for k in taskdict:
-        print ( f"{k} : \n \
-                {secs_to_string(taskdict[k]['amount'].total_seconds())} {time_suffix}", " - currently running" if taskdict[k]["running"] else "" )
+                    taskdict[name].amount += am
+                    taskdict[name].active = True
+    if not silent:
+        for k in taskdict:
+            print ( f"{k} : \n \
+                    {secs_to_string(int(taskdict[k].amount.total_seconds()))} {time_suffix}", " - currently running" if taskdict[k].active else "" )
     return {date: taskdict}
 
-def days_summary(cursor,date_from,num_days,time_suffix="this week"):
+def days_summary(cursor,date_from,num_days,time_suffix="this week", silent=False) -> Dict[str, timedelta]:
     totals = {}
     for i in range(0,num_days):
         d = (date_from + timedelta(days=i))
-        print("###### " + d.isoformat() + " ######")
-        r = day_summary(cursor,d,time_suffix="")
+        if not silent:
+            print("###### " + d.isoformat() + " ######")
+        r = day_summary(cursor, d, time_suffix="", silent=silent)
         if r is not None:
             totals = totals | r
     summary = {}
     for date in totals:
         for key in totals[date]:
             if key in summary:
-                summary[key] += totals[date][key]["amount"]
+                summary[key] += totals[date][key].amount
             else:
-                summary[key] = totals[date][key]["amount"]
-    print("###### SUMMARY #####")
-    for k in summary:
-            print ( f"{k} : \n \
-                    {secs_to_string(summary[k].total_seconds())} {time_suffix}" )
+                summary[key] = totals[date][key].amount
+    if not silent:
+        print("###### SUMMARY #####")
+        for k in summary:
+            if k is not None and summary[k] is not None:
+                print ( f"{k} : \n \
+                        {secs_to_string(int(summary[k].total_seconds()))} {time_suffix}" )
+    return summary
 
 def add_minutes(conn: sqlite3.Connection, num: int, date: date, activity: str):
     stamp_start = int(time.mktime(date.timetuple()))
@@ -105,7 +120,7 @@ def add_minutes(conn: sqlite3.Connection, num: int, date: date, activity: str):
     cursor.execute("insert into times(start, end, fk_activity) values (?, ?, ?)", (stamp_start, stamp_end, act_id))
     conn.commit()
    
-def parse_day(s: str):
+def parse_day(s: str) -> date | None:
     parts = s.split(".")
     if not 0 < len(parts) < 4:
         return None
@@ -135,7 +150,33 @@ def get_activity_id(conn: sqlite3.Connection, activity: str) -> int:
         conn.commit()
     return act_id[0]
 
+def parse_comma_list(comma_list: str) -> List[str]:
+    return [x.strip() for x in comma_list.strip().split(sep=",")]
 
+def parse_hours(hours: str) -> Tuple[int,int,int] | None: 
+    h = hours.strip().split(":")
+    if len(h) == 1:
+        return (int(hours.strip()), 0, 0)
+    elif len(h) == 2:
+        return (int(h[0].strip()), int(h[1].strip()), 0)
+    elif len(h) == 3:
+        return (int(h[0].strip()), int(h[1].strip()), int(h[2].strip()))
+    else: 
+        return None
+
+def get_holidays(state = "mv") -> List[date] | None:
+    holidays = requests.get("https://get.api-feiertage.de?states=mv").json()
+    if not holidays["status"] == "success":
+        return None
+    return [date.fromisoformat(x["date"]) for x in holidays["feiertage"] if int(x[state]) == 1]
+
+def is_holiday(day: date) -> bool:
+    holidays = get_holidays()
+    if holidays is not None:
+        for holiday in holidays:
+            if day.isoformat() == holiday.isoformat():
+                return True
+    return False
 
 def main():
     global args
@@ -163,8 +204,9 @@ def main():
             return
         case ["running"]:
             res = cursor.execute("select start, name from running join activity on fk_activity = activity_id")
-            if (activities := res.fetchall()) is None:
-                print("No activities are running at the moment")
+            activities = res.fetchall()
+            if len(activities) == 0:
+                print("nothing running")
                 return
             for (start, name) in activities:
                 lt = time.localtime(start)
@@ -185,7 +227,8 @@ def main():
             conn.commit()
         case ["list"]:
             res = cursor.execute("select start, end, name from times join activity on fk_activity = activity_id")
-            if (times := res.fetchall()) is None:
+            times = res.fetchall()
+            if len(times) == 0:
                 print("Task list still empty")
                 return
             times.sort(key = lambda t: int(t[0]))
@@ -226,6 +269,14 @@ def main():
                 days_summary(cursor,d,i,f"in the last {i} days")
             except ValueError:
                 print("Please use a number... example: > track last 6 days")
+        case ["summary", "from", x, "to", y]:
+            begin = parse_day(x)
+            end = parse_day(y)
+            if end == None or begin == None:
+                print("please enter a valid date")
+                return
+            days = (end - begin).days
+            days_summary(cursor,begin,int(days),f"between {begin.isoformat()} and {end.isoformat()}")
         case ["add", num, "minutes", "to" , to , "on", on]:
             d = parse_day(on)
             if d == None:
@@ -238,23 +289,46 @@ def main():
                 return
             add_minutes(conn, num, d, to)
             conn.close()
-
-
-
-
-            
-
-
-
-
-
-
-
-
-
-            
-
-
+        case ["balance", "from", start, "to", end, "where", "work", "is", work, "and", "vacation", "is", vacation, "with", hours, "hours"]: 
+            do_balance(cursor, start, end, work, vacation, hours)
+        case _:
+            print("Unknown command.")
 
 if __name__ == "__main__":
     main()
+
+
+def do_balance(cursor: sqlite3.Cursor, start: str, end: str, work: str, vacation: str, hours: str, silent=False):
+  begin = parse_day(start)
+  end: date| None = parse_day(end)
+  work_types = parse_comma_list(work)
+  vacation_types = parse_comma_list(vacation)
+  day_hours = parse_hours(hours)
+  if begin is None or end is None or day_hours is None:
+      print("please enter something correct")
+      return
+  hours: timedelta = timedelta(hours= day_hours[0], minutes= day_hours[1], seconds=day_hours[2])
+  days = (end - begin).days
+  work_amount = timedelta(0)
+  vacation_amount = timedelta(0)
+  summary = days_summary(cursor,begin, int(days), silent=True)
+  for k in summary:
+      if k in work_types:
+          work_amount += summary[k]
+      elif k in vacation_types:
+          vacation_amount += summary[k]
+  should_hours = timedelta(0)
+  for d in range(0, days):
+      day = begin + timedelta(days=d)
+      if day.isoweekday() <= 5 and not is_holiday(day):
+          should_hours += hours
+  should_hours -= vacation_amount
+  if should_hours.total_seconds() > work_amount.total_seconds():
+    delta = "\nTo work: ", secs_to_string(int((should_hours - work_amount).total_seconds()))
+  else:
+    delta = "\nOverhours: ", secs_to_string(int((work_amount - should_hours ).total_seconds()))
+  print("Should work: " + secs_to_string(int(should_hours.total_seconds())) +
+        "\nhave worked: " + secs_to_string(int(work_amount.total_seconds())) +
+        delta)
+  return {"should": should_hours, "work": work_amount, "vacation": vacation_amount}
+
