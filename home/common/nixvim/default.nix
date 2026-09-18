@@ -240,6 +240,12 @@ in
           fg = "#333333"
         });
 
+        vim.keymap.set('n', '<Leader>u', function()
+          diag = vim.diagnostic.get_next()
+          col = diag["col"]
+          lin = diag["lnum"]
+          vim.api.nvim_win_set_cursor(0, {lin + 1, col})
+        end)
         '';
 
   };
