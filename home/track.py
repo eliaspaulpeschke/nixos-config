@@ -178,6 +178,41 @@ def is_holiday(day: date) -> bool:
                 return True
     return False
 
+def do_balance(cursor: sqlite3.Cursor, start: str, end: str, work: str, vacation: str, hours: str, silent=False):
+  begin = parse_day(start)
+  end: date| None = parse_day(end)
+  work_types = parse_comma_list(work)
+  vacation_types = parse_comma_list(vacation)
+  day_hours = parse_hours(hours)
+  if begin is None or end is None or day_hours is None:
+      print("please enter something correct")
+      return
+  hours: timedelta = timedelta(hours= day_hours[0], minutes= day_hours[1], seconds=day_hours[2])
+  days = (end - begin).days
+  work_amount = timedelta(0)
+  vacation_amount = timedelta(0)
+  summary = days_summary(cursor,begin, int(days), silent=True)
+  for k in summary:
+      if k in work_types:
+          work_amount += summary[k]
+      elif k in vacation_types:
+          vacation_amount += summary[k]
+  should_hours = timedelta(0)
+  for d in range(0, days):
+      day = begin + timedelta(days=d)
+      if day.isoweekday() <= 5 and not is_holiday(day):
+          should_hours += hours
+  should_hours -= vacation_amount
+  if not silent:
+      if should_hours.total_seconds() > work_amount.total_seconds():
+        delta = "\nTo work: ", secs_to_string(int((should_hours - work_amount).total_seconds()))
+      else:
+        delta = "\nOverhours: ", secs_to_string(int((work_amount - should_hours ).total_seconds()))
+      print("Should work: " + secs_to_string(int(should_hours.total_seconds())) +
+            "\nhave worked: " + secs_to_string(int(work_amount.total_seconds())) +
+            delta)
+  return {"should": should_hours, "work": work_amount, "vacation": vacation_amount}
+
 def main():
     global args
     args = setup_args()
@@ -298,37 +333,4 @@ if __name__ == "__main__":
     main()
 
 
-def do_balance(cursor: sqlite3.Cursor, start: str, end: str, work: str, vacation: str, hours: str, silent=False):
-  begin = parse_day(start)
-  end: date| None = parse_day(end)
-  work_types = parse_comma_list(work)
-  vacation_types = parse_comma_list(vacation)
-  day_hours = parse_hours(hours)
-  if begin is None or end is None or day_hours is None:
-      print("please enter something correct")
-      return
-  hours: timedelta = timedelta(hours= day_hours[0], minutes= day_hours[1], seconds=day_hours[2])
-  days = (end - begin).days
-  work_amount = timedelta(0)
-  vacation_amount = timedelta(0)
-  summary = days_summary(cursor,begin, int(days), silent=True)
-  for k in summary:
-      if k in work_types:
-          work_amount += summary[k]
-      elif k in vacation_types:
-          vacation_amount += summary[k]
-  should_hours = timedelta(0)
-  for d in range(0, days):
-      day = begin + timedelta(days=d)
-      if day.isoweekday() <= 5 and not is_holiday(day):
-          should_hours += hours
-  should_hours -= vacation_amount
-  if should_hours.total_seconds() > work_amount.total_seconds():
-    delta = "\nTo work: ", secs_to_string(int((should_hours - work_amount).total_seconds()))
-  else:
-    delta = "\nOverhours: ", secs_to_string(int((work_amount - should_hours ).total_seconds()))
-  print("Should work: " + secs_to_string(int(should_hours.total_seconds())) +
-        "\nhave worked: " + secs_to_string(int(work_amount.total_seconds())) +
-        delta)
-  return {"should": should_hours, "work": work_amount, "vacation": vacation_amount}
 
