@@ -191,33 +191,42 @@ def do_balance(cursor: sqlite3.Cursor, start: str, end: str, work: str, vacation
   if begin is None or end is None or day_hours is None:
       print("please enter something correct")
       return
-  hours: timedelta = timedelta(hours= day_hours[0], minutes= day_hours[1], seconds=day_hours[2])
+  hours: timedelta = timedelta(hours = day_hours[0], minutes= day_hours[1], seconds=day_hours[2])
   days = (end - begin).days
+  if not silent:
+    print(days, " days.")
   work_amount = timedelta(0)
   vacation_amount = timedelta(0)
-  summary = days_summary(cursor,begin, int(days) + 1, silent=True)
+  summary = days_summary(cursor, begin, int(days) + 1, silent=True)
   for k in summary:
       if k in work_types:
           work_amount += summary[k]
       elif k in vacation_types:
           vacation_amount += summary[k]
   should_hours = timedelta(0)
+  count_days = 0
   for d in range(0, days + 1):
       day = begin + timedelta(days=d)
       if day.isoweekday() <= 5 and not is_holiday(day):
           should_hours += hours
-  #should_hours -= vacation_amount
+          count_days += 1
   if not silent:
-      if (should_hours - vacation_amount).total_seconds() > work_amount.total_seconds():
-        delta = "\nTo work: " + secs_to_string(int(((should_hours - vacation_amount) - work_amount).total_seconds()))
+    print(count_days, "work days.")
+    if (should_hours < vacation_amount):
+        print("Warning: should work less than had pause!")
+  remaining_should = should_hours - vacation_amount
+  if not silent:
+      if remaining_should.total_seconds() > work_amount.total_seconds():
+        delta = "\nTo work: " + secs_to_string(int((remaining_should - work_amount).total_seconds()))
       else:
-        delta = "\nOverhours: " + secs_to_string(int((work_amount - (should_hours - vacation_amount)).total_seconds()))
+        delta = "\nOverhours: " + secs_to_string(int((work_amount - remaining_should).total_seconds()))
 
       print("Should work: " + secs_to_string(int(should_hours.total_seconds())) +
-            "\nhave worked: " + secs_to_string(int(work_amount.total_seconds())) +
             "\nhad pause: " + secs_to_string(int(vacation_amount.total_seconds())) +
+            "\nremaining: " + secs_to_string(int(remaining_should.total_seconds())) +
+            "\nhave worked: " + secs_to_string(int(work_amount.total_seconds())) +
             delta)
-  return {"should": should_hours, "work": work_amount, "vacation": vacation_amount}
+  return {"should": should_hours, "work": work_amount, "remaining": remaining_should, "vacation": vacation_amount}
 
 def main():
     global args
