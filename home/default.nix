@@ -9,6 +9,7 @@
      ];
 
   home.packages = with pkgs; [
+    meshlab
     ardour
     telegram-desktop
     signal-desktop
