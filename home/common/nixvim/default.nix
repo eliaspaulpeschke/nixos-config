@@ -129,6 +129,10 @@ in
 
     lsp = {
       servers = {
+        tinymist = {
+          enable = true;
+          package = null;
+        };
         postgres_lsp = {
           enable = true;
           package = null;
