@@ -19,6 +19,8 @@
     tridactyl-native
     kdePackages.kcachegrind
     kicad
+    freecad
+    openscad
   ];
 
   services.dunst.enable = true;
