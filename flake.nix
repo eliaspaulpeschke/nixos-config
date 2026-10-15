@@ -32,7 +32,6 @@
 
       modules = [
         ./overlays.nix
-
 	./nixos
 
         nixos-hardware.nixosModules.lenovo-thinkpad-t495
@@ -44,7 +43,6 @@
 	  home-manager.extraSpecialArgs = { inherit inputs; };
 	  home-manager.backupFileExtension = "bak";
           home-manager.users.elias = import ./home;
-
         }
       ];
     };
