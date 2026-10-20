@@ -9,6 +9,8 @@
      ];
 
   home.packages = with pkgs; [
+    maim
+    neovim-remote
     libnotify
     xclip
     cryptsetup
