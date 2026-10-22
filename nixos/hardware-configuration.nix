@@ -8,6 +8,8 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   boot.initrd.availableKernelModules = [ "nvme" "ehci_pci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" "v4l2loopback" ];
