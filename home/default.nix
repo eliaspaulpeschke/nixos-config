@@ -41,20 +41,28 @@
     enableDefaultConfig = false;
     #old defaults set explicitly
     matchBlocks = { 
-        "*" = { 
-            forwardAgent = false; 
-            addKeysToAgent = "no"; 
-            compression = false; 
-            serverAliveInterval = 0; 
-            serverAliveCountMax = 3; 
-            hashKnownHosts = false; 
-            userKnownHostsFile = "~/.ssh/known_hosts"; 
-            controlMaster = "no"; 
-            controlPath = "~/.ssh/master-%r@%n:%p"; 
-            controlPersist = "no"; 
-        };
-    }; 
-    
+      "*" = { 
+        forwardAgent = false; 
+        addKeysToAgent = "no"; 
+        compression = false; 
+        serverAliveInterval = 0; 
+        serverAliveCountMax = 3; 
+        hashKnownHosts = false; 
+        userKnownHostsFile = "~/.ssh/known_hosts"; 
+        controlMaster = "no"; 
+        controlPath = "~/.ssh/master-%r@%n:%p"; 
+        controlPersist = "no"; 
+      };
+      agentvm = {
+        hostname = "192.168.77.2";
+        user = "agent";
+        identityFile = "~/.ssh/agent_key";
+        identitiesOnly = true;
+        forwardAgent = false;
+        userKnownHostsFile = "/dev/null";
+        extraOptions.StrictHostKeyChecking = "no";
+      };
+    };
   };
 
   programs.readline = {
