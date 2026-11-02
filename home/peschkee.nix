@@ -11,7 +11,6 @@
 
   home.packages = with pkgs; [
     xca
-    pidgin
   ];
 
   programs.git = {
