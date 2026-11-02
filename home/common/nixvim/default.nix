@@ -129,6 +129,9 @@ in
 
     lsp = {
       servers = {
+        bashls = {
+          enable = true;
+        };
         tinymist = {
           enable = true;
           package = null;
