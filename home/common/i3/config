@@ -59,7 +59,7 @@ bindsym $mod+minus scratchpad show
 #bindsym $mod+Return exec $wm_setting_app_terminal
 
 # Start a web browser
-bindsym $mod+$smod+Return exec $wm_setting_app_browser
+#bindsym $mod+$smod+Return exec $wm_setting_app_browser
 
 # Start a program launcher
 bindsym $mod+d exec $wm_setting_app_launcher
@@ -216,3 +216,4 @@ bindsym $mod+$smod+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 bindsym Print exec --no-startup-id maim -s -u | xclip -selection clipboard -t image/png -i
 
+bindsym $mod+$smod+Return exec "alacritty"
