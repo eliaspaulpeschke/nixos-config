@@ -40,6 +40,7 @@
     hardware = {
         bluetooth.enable = true;
         keyboard.qmk.enable = true;
+        graphics.enable32Bit = true;
         };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
