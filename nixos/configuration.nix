@@ -259,6 +259,8 @@
 
   security.rtkit.enable = true;
 
+  programs.steam.enable = true;
+
 
 
 
