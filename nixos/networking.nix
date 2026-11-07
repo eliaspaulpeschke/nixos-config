@@ -29,6 +29,7 @@
 
     chain input {
       type filter hook input priority -10; policy accept;
+      iifname "tap-agent" ct state established,related accept
       iifname "tap-agent" drop                       # guest cannot talk to the host at all
     }
 
