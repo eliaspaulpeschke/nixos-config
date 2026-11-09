@@ -46,8 +46,8 @@
     pkgs.nerd-fonts.geist-mono
     pkgs.nerd-fonts.fira-mono
     (pkgs.callPackage ./fonts/default.nix { lib = lib; stdenv = stdenv; })
+    (pkgs.callPackage ./dmenu-tmux.nix { pkgs = pkgs; config = config; })
     (pkgs.callPackage ./i3-battery-popup/default.nix { lib = lib; stdenv = stdenv; })
-
   ];
 
   fonts.fontconfig.enable = true;
